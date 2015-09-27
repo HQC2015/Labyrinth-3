@@ -6,7 +6,6 @@
 
     public class Game
     {
-        private const string WelcomeMessage = "Welcome to \"Labyrinth\" game, where you try to escape!\nUse 'top' to view the top players\n'restart' to start a new game\n'exit' to quit the game.\n ";
         private const int PlayerStartPositionX = 3;
         private const int PlayerStartPositionY = 3;
         private const int LabyrinthSize = 7;
@@ -14,9 +13,9 @@
         private const string EmptySpaceSymbol = "-";
         private const string FilledSpaceSymbol = "x";
 
+        private const string WelcomeMessage = "Welcome to \"Labyrinth\" game, where you try to escape!\nUse 'top' to view the top players\n'restart' to start a new game\n'exit' to quit the game.\n ";
         private const string EnterMoveMessage = "Enter your move (L=left, R=right, D=down, U=up): ";
         private const string InvalidMoveMessage = "\nInvalid move! \n ";
-
         private const string ScoreboardEnterNicknameMessage = "Please enter your nickname";
         private const string ScoreboardEmptyMessage = "The Scoreboard is empty!";
         private const string ExitMessage = "GoodBye!";
@@ -181,33 +180,11 @@
             while (flag)
             {
                 Console.Write(EnterMoveMessage);
-                string i = string.Empty;
-                i = Console.ReadLine();
-                switch (i)
+                string inputCommand = string.Empty;
+                inputCommand = Console.ReadLine();
+                switch (inputCommand.ToLower())
                 {
                     case "d":
-                        if (labyrinth[x + 1, y] == EmptySpaceSymbol)
-                        {
-                            labyrinth[x, y] = EmptySpaceSymbol;
-                            labyrinth[x + 1, y] = PlayerSymbol;
-                            x++;
-                            currentScore++;
-                        }
-                        else
-                        {
-                            Console.WriteLine(InvalidMoveMessage);
-                        }
-
-                        if (x == LabyrinthSize - 1)
-                        {
-                            Console.WriteLine("\nCongratulations you escaped with {0} Score.\n", currentScore);
-                            flag = false;
-                            Game.flag = true;
-                        }
-
-                        DisplayLabyrinth(labyrinth);
-                        break;
-                    case "D":
                         if (labyrinth[x + 1, y] == EmptySpaceSymbol)
                         {
                             labyrinth[x, y] = EmptySpaceSymbol;
@@ -251,28 +228,6 @@
 
                         DisplayLabyrinth(labyrinth);
                         break;
-                    case "U":
-                        if (labyrinth[x - 1, y] == EmptySpaceSymbol)
-                        {
-                            labyrinth[x, y] = EmptySpaceSymbol;
-                            labyrinth[x - 1, y] = PlayerSymbol;
-                            x--;
-                            currentScore++;
-                        }
-                        else
-                        {
-                            Console.WriteLine(InvalidMoveMessage);
-                        }
-
-                        if (x == 0)
-                        {
-                            Console.WriteLine("\nCongratulations you escaped with {0} Score.\n", currentScore);
-                            flag = false;
-                            Game.flag = true;
-                        }
-
-                        DisplayLabyrinth(labyrinth);
-                        break;
                     case "r":
                         if (labyrinth[x, y + 1] == EmptySpaceSymbol)
                         {
@@ -295,51 +250,7 @@
 
                         DisplayLabyrinth(labyrinth);
                         break;
-                    case "R":
-                        if (labyrinth[x, y + 1] == EmptySpaceSymbol)
-                        {
-                            labyrinth[x, y] = EmptySpaceSymbol;
-                            labyrinth[x, y + 1] = PlayerSymbol;
-                            y++;
-                            currentScore++;
-                        }
-                        else
-                        {
-                            Console.WriteLine(InvalidMoveMessage);
-                        }
-
-                        if (y == LabyrinthSize - 1)
-                        {
-                            Console.WriteLine("\nCongratulations you escaped with {0} Score.\n", currentScore);
-                            flag = false;
-                            Game.flag = true;
-                        }
-
-                        DisplayLabyrinth(labyrinth);
-                        break;
                     case "l":
-                        if (labyrinth[x, y - 1] == EmptySpaceSymbol)
-                        {
-                            labyrinth[x, y] = EmptySpaceSymbol;
-                            labyrinth[x, y - 1] = PlayerSymbol;
-                            y--;
-                            currentScore++;
-                        }
-                        else
-                        {
-                            Console.WriteLine(InvalidMoveMessage);
-                        }
-
-                        if (y == 0)
-                        {
-                            Console.WriteLine("\nCongratulations you escaped with {0} Score.\n", currentScore);
-                            flag = false;
-                            Game.flag = true;
-                        }
-
-                        DisplayLabyrinth(labyrinth);
-                        break;
-                    case "L":
                         if (labyrinth[x, y - 1] == EmptySpaceSymbol)
                         {
                             labyrinth[x, y] = EmptySpaceSymbol;
