@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="kursov_proekt.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Scoreboard\Board.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

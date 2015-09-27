@@ -1,7 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kursov_proekt", "kursov_proekt.csproj", "{5DA427F9-9891-40EB-85F8-19E00CC5F816}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Labyrinth-3", "Labyrinth-3.csproj", "{5DA427F9-9891-40EB-85F8-19E00CC5F816}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
