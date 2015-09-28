@@ -135,7 +135,6 @@ Refactoring Documentation for Project “Labyrinth-3”
 	-   Renamed the project solution from `kursov_proekt` to `Labyrinth-3`.
 	-   Renamed the main class from `Program` to `AppStart`.
 	-   Extracted from the main class `AppStart`, each class in separate file - `Game.cs`, `Player.cs` etc.
-	-   ...
 2.  Reformatted the source code:
 	-   Removed all unneeded empty lines, e.g. in the method TypeCommand().
 	-   Inserted empty lines between the methods.
@@ -159,7 +158,6 @@ Refactoring Documentation for Project “Labyrinth-3”
 	-   Put **{** and **}** after all conditionals and loops (when missing).
 	-   Character casing: variables and fields made **camelCase**; types and methods made **PascalCase**.
 	-   Formatted all other elements of the source code according to the best practices introduced in the course “[High-Quality Programming Code](http://telerikacademy.com/Courses/Courses/Details/244)”.
-	-   …
 3.  Extracted constants:
 	-   In class `Game.cs`
         * WelcomeMessage = "Welcome to \"Labyrinth\" game, where you try to escape!\nUse 'top' to view the top players\n'restart' to start a new game\n'exit' to quit the game.\n "
