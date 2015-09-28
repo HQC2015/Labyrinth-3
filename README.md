@@ -1,5 +1,15 @@
-High-Quality Programming Code – Team Projects
+﻿High-Quality Programming Code – Team 'Labyrinth-3'
 =============================================
+
+Team Members
+--------
+
+* kossov - Огнян Коссов
+* tabula - Тошко Попов
+* half.human - Радослав Ангелов
+* ventsislav.a.ivanov - Венцислав Иванов
+* StanimiraHK - Станимира Кормева
+* tomi.hristov.5 - Томи Христов
 
 Overview
 --------
