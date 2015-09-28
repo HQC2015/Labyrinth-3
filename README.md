@@ -89,7 +89,7 @@ Discussion Forum
 
 -   You can freely discuss the course projects and ask questions in the official discussion forum of the course: <https://telerikacademy.com/Forum/Category/19/c#-qpc>
 
-Sample Refactoring Documentation for Project “Game 15”                                                                                                                          
+Sample Refactoring Documentation for Project “Game 15”  
 ------------------------------------------------------
 
 1.  Redesigned the project structure: Team “…”
@@ -128,3 +128,85 @@ Sample Refactoring Documentation for Project “Game 15”
 6.  Introduced class `ScoreBoard` and moved all related functionality in it.
 7.  Moved method `GenerateRandomNumber(int start, int end)` to separate class `RandomUtils`.
 8.  …
+
+Refactoring Documentation for Project “Labyrinth-3”
+------------------------------------------------------
+1.  Redesigned the project structure: Team "Labyringth-3"
+	-   Renamed the project solution from `kursov_proekt` to `Labyrinth-3`.
+	-   Renamed the main class from `Program` to `AppStart`.
+	-   Extracted from the main class `AppStart`, each class in separate file - `Game.cs`, `Player.cs` etc.
+	-   ...
+2.  Reformatted the source code:
+	-   Removed all unneeded empty lines, e.g. in the method TypeCommand().
+	-   Inserted empty lines between the methods.
+	-   Split the lines containing several statements into several simple lines, e.g.:
+	
+	Before:
+	
+		if (labyrinth[i, j] == "0") { labyrinth[i, j] = "-"; } else { labyrinth[i, j] = "x"; }
+		
+	After:
+
+		if (labyrinth[i, j] == "0")
+        {
+            labyrinth[i, j] = "-";
+        }
+        else
+        {
+            labyrinth[i, j] = "x";
+        }
+	-   Formatted the curly braces **{** and **}** according to the best practices for the C\# language.
+	-   Put **{** and **}** after all conditionals and loops (when missing).
+	-   Character casing: variables and fields made **camelCase**; types and methods made **PascalCase**.
+	-   Formatted all other elements of the source code according to the best practices introduced in the course “[High-Quality Programming Code](http://telerikacademy.com/Courses/Courses/Details/244)”.
+	-   …
+3.  Extracted constants:
+	-   In class `Game.cs`
+        * WelcomeMessage = "Welcome to \"Labyrinth\" game, where you try to escape!\nUse 'top' to view the top players\n'restart' to start a new game\n'exit' to quit the game.\n "
+        * PlayerStartPositionX = 3
+        * PlayerStartPositionY = 3
+        * LabyrinthSize = 7
+        * PlayerSymbol = "*"
+        * EmptySpaceSymbol = "-"
+        * FilledSpaceSymbol = "x"
+        * EnterMoveMessage = "Enter your move (L=left, R=right, D=down, U=up): "
+        * InvalidMoveMessage = "Invalid move!"
+        * ScoreboardEnterNicknameMessage = "Please enter your nickname"
+        * ScoreboardEmptyMessage = "The Scoreboard is empty!"
+        * ExitMessage = "GoodBye!"
+4.  Changed DisplayLabyrinth() logic
+	
+	Before:
+	
+		private static void DisplayLabyrinth(string[,] labyrinth)
+        {
+            for (int i = 0; i < 7; i++)
+            {
+                string s1 = labyrinth[i, 0];
+                string s2 = labyrinth[i, 1];
+                string s3 = labyrinth[i, 2];
+                string s4 = labyrinth[i, 3];
+                string s5 = labyrinth[i, 4];
+                string s6 = labyrinth[i, 5];
+                string s7 = labyrinth[i, 6];
+
+                Console.WriteLine("{0} {1} {2} {3} {4} {5} {6} ", s1, s2, s3, s4, s5, s6, s7);
+                Console.WriteLine();
+             }
+
+            Console.WriteLine();
+         }
+		
+	After:
+
+        for (int i = 0; i < LabyrinthSize; i++)
+        {
+            for (int j = 0; j < LabyrinthSize; j++)
+            {
+                string currentCell = labyrinth[i, j];
+                Console.Write(currentCell + ' ');
+            }
+
+            Console.WriteLine();
+        }
+5.  

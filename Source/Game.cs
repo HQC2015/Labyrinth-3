@@ -15,7 +15,7 @@
 
         private const string WelcomeMessage = "Welcome to \"Labyrinth\" game, where you try to escape!\nUse 'top' to view the top players\n'restart' to start a new game\n'exit' to quit the game.\n ";
         private const string EnterMoveMessage = "Enter your move (L=left, R=right, D=down, U=up): ";
-        private const string InvalidMoveMessage = "\nInvalid move! \n ";
+        private const string InvalidMoveMessage = "Invalid move!";
         private const string ScoreboardEnterNicknameMessage = "Please enter your nickname";
         private const string ScoreboardEmptyMessage = "The Scoreboard is empty!";
         private const string ExitMessage = "GoodBye!";

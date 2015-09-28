@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="AppStart.cs" />
     <Compile Include="Player\Player.cs" />
   </ItemGroup>
   <ItemGroup>
