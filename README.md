@@ -1,4 +1,4 @@
-﻿High-Quality Programming Code – Team 'Labyrinth-3'
+High-Quality Programming Code – Team 'Labyrinth-3'
 =============================================
 
 Team Members
@@ -207,4 +207,29 @@ Refactoring Documentation for Project “Labyrinth-3”
 
             Console.WriteLine();
         }
-5.  
+5.  Add Creational patterns
+
+	5.1 Singleton - added new class `Board.cs`
+		
+		protected Board()
+        {
+        }
+
+        public static Board Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Board();
+                }
+
+                return instance;
+            }
+        }
+	5.2
+
+	5.3
+
+6. 
+
