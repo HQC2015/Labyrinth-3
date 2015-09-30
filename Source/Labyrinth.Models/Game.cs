@@ -19,7 +19,7 @@
         public static void Start()
         {
             commandListener = playing = true;
-            var labyrinth = new string[GlobalConstants.LabyrinthSizeRow, GlobalConstants.LabyrinthSizeCol];
+            var labyrinth = Board.Instance;
 
             while (playing)
             {
@@ -29,11 +29,12 @@
 
                 while (mazeHasSolution == false)
                 {
-                    LabyrinthGenerator(labyrinth, GlobalConstants.PlayerStartPositionX, GlobalConstants.PlayerStartPositionY);
+                    //LabyrinthGenerator(labyrinth, GlobalConstants.PlayerStartPositionX, GlobalConstants.PlayerStartPositionY);
+                    labyrinth.FillBoard();
                     SolutionChecker(labyrinth, GlobalConstants.PlayerStartPositionX, GlobalConstants.PlayerStartPositionY);
                 }
 
-                DisplayLabyrinth(labyrinth);
+                labyrinth.Display();
                 TypeCommand(labyrinth, commandListener, GlobalConstants.PlayerStartPositionX, GlobalConstants.PlayerStartPositionY);
 
                 // used for adding score only when game is finished naturally and not by the restart command.
@@ -44,11 +45,11 @@
             }
         }
 
-        private static void SolutionChecker(string[,] labyrinth, int playerX, int playerY)
+        private static void SolutionChecker(Board labyrinth, int playerX, int playerY)
         {
             bool checking = true;
-            if (labyrinth[playerX + 1, playerY] == GlobalConstants.FilledSpaceSymbol && labyrinth[playerX, playerY + 1] == GlobalConstants.FilledSpaceSymbol &&
-                labyrinth[playerX - 1, playerY] == GlobalConstants.FilledSpaceSymbol && labyrinth[playerX, playerY - 1] == GlobalConstants.FilledSpaceSymbol)
+            if (labyrinth.Check(playerX + 1, playerY, GlobalConstants.FilledSpaceSymbol) && labyrinth.Check(playerX, playerY + 1, GlobalConstants.FilledSpaceSymbol) &&
+                labyrinth.Check(playerX - 1, playerY, GlobalConstants.FilledSpaceSymbol) && labyrinth.Check(playerX, playerY - 1, GlobalConstants.FilledSpaceSymbol))
             { // player is trapped
                 checking = false;
             }
@@ -57,24 +58,24 @@
             {
                 try
                 {
-                    if (labyrinth[playerX + 1, playerY] == GlobalConstants.EmptySpaceSymbol)
+                    if (labyrinth.Check(playerX + 1, playerY, GlobalConstants.EmptySpaceSymbol))
                     {
-                        labyrinth[playerX + 1, playerY] = "0";
+                        labyrinth.Replace(playerX + 1, playerY, "0");
                         playerX++;
                     }
-                    else if (labyrinth[playerX, playerY + 1] == GlobalConstants.EmptySpaceSymbol)
+                    else if (labyrinth.Check(playerX, playerY + 1, GlobalConstants.EmptySpaceSymbol))
                     {
-                        labyrinth[playerX, playerY + 1] = "0";
+                        labyrinth.Replace(playerX, playerY + 1, "0");
                         playerY++;
                     }
-                    else if (labyrinth[playerX - 1, playerY] == GlobalConstants.EmptySpaceSymbol)
+                    else if (labyrinth.Check(playerX - 1, playerY, GlobalConstants.EmptySpaceSymbol))
                     {
-                        labyrinth[playerX - 1, playerY] = "0";
+                        labyrinth.Replace(playerX - 1, playerY, "0");
                         playerX--;
                     }
-                    else if (labyrinth[playerX, playerY - 1] == GlobalConstants.EmptySpaceSymbol)
+                    else if (labyrinth.Check(playerX, playerY - 1, GlobalConstants.EmptySpaceSymbol))
                     {
-                        labyrinth[playerX, playerY - 1] = "0";
+                        labyrinth.Replace(playerX, playerY - 1, "0");
                         playerY--;
                     }
                     else
@@ -88,9 +89,9 @@
                     {
                         for (int j = 0; j < GlobalConstants.LabyrinthSizeCol; j++)
                         {
-                            if (labyrinth[i, j] == "0")
+                            if (labyrinth.Check(i, j, "0"))
                             {
-                                labyrinth[i, j] = GlobalConstants.EmptySpaceSymbol;
+                                labyrinth.Replace(i, j, GlobalConstants.EmptySpaceSymbol);
                             }
                         }
 
@@ -159,7 +160,7 @@
             }
         }
 
-        private static void TypeCommand(string[,] labyrinth, bool flag, int x, int y)
+        private static void TypeCommand(Board labyrinth, bool flag, int x, int y)
         {
             currentScore = 0;
 
@@ -171,10 +172,10 @@
                 switch (inputCommand.ToLower())
                 {
                     case "d":
-                        if (labyrinth[x + 1, y] == GlobalConstants.EmptySpaceSymbol)
+                        if (labyrinth.Check(x + 1, y, GlobalConstants.EmptySpaceSymbol))
                         {
-                            labyrinth[x, y] = GlobalConstants.EmptySpaceSymbol;
-                            labyrinth[x + 1, y] = GlobalConstants.PlayerSymbol;
+                            labyrinth.Replace(x, y, GlobalConstants.EmptySpaceSymbol);
+                            labyrinth.Replace(x + 1, y, GlobalConstants.PlayerSymbol);
                             x++;
                             currentScore++;
                         }
@@ -190,13 +191,13 @@
                             Game.flag = true;
                         }
 
-                        DisplayLabyrinth(labyrinth);
+                        labyrinth.Display();
                         break;
                     case "u":
-                        if (labyrinth[x - 1, y] == GlobalConstants.EmptySpaceSymbol)
+                        if (labyrinth.Check(x - 1, y, GlobalConstants.EmptySpaceSymbol))
                         {
-                            labyrinth[x, y] = GlobalConstants.EmptySpaceSymbol;
-                            labyrinth[x - 1, y] = GlobalConstants.PlayerSymbol;
+                            labyrinth.Replace(x, y, GlobalConstants.EmptySpaceSymbol);
+                            labyrinth.Replace(x - 1, y, GlobalConstants.PlayerSymbol);
                             x--;
                             currentScore++;
                         }
@@ -212,13 +213,13 @@
                             Game.flag = true;
                         }
 
-                        DisplayLabyrinth(labyrinth);
+                        labyrinth.Display();
                         break;
                     case "r":
-                        if (labyrinth[x, y + 1] == GlobalConstants.EmptySpaceSymbol)
+                        if (labyrinth.Check(x, y + 1, GlobalConstants.EmptySpaceSymbol))
                         {
-                            labyrinth[x, y] = GlobalConstants.EmptySpaceSymbol;
-                            labyrinth[x, y + 1] = GlobalConstants.PlayerSymbol;
+                            labyrinth.Replace(x, y, GlobalConstants.EmptySpaceSymbol);
+                            labyrinth.Replace(x, y + 1, GlobalConstants.PlayerSymbol);
                             y++;
                             currentScore++;
                         }
@@ -234,13 +235,13 @@
                             Game.flag = true;
                         }
 
-                        DisplayLabyrinth(labyrinth);
+                        labyrinth.Display();
                         break;
                     case "l":
-                        if (labyrinth[x, y - 1] == GlobalConstants.EmptySpaceSymbol)
+                        if (labyrinth.Check(x, y - 1, GlobalConstants.EmptySpaceSymbol))
                         {
-                            labyrinth[x, y] = GlobalConstants.EmptySpaceSymbol;
-                            labyrinth[x, y - 1] = GlobalConstants.PlayerSymbol;
+                            labyrinth.Replace(x, y, GlobalConstants.EmptySpaceSymbol);
+                            labyrinth.Replace(x, y - 1, GlobalConstants.PlayerSymbol);
                             y--;
                             currentScore++;
                         }
@@ -256,12 +257,12 @@
                             Game.flag = true;
                         }
 
-                        DisplayLabyrinth(labyrinth);
+                        labyrinth.Display();
                         break;
                     case "top":
                         ShowPlayer(scores);
                         Console.WriteLine("\n");
-                        DisplayLabyrinth(labyrinth);
+                        labyrinth.Display();
                         break;
                     case "restart":
                         flag = false;
@@ -274,43 +275,6 @@
                         Console.WriteLine("Invalid command!");
                         break;
                 }
-            }
-        }
-
-        private static void LabyrinthGenerator(string[,] labyrinth, int playerX, int playerY)
-        {
-            var randomInt = new Random();
-
-            for (int i = 0; i < GlobalConstants.LabyrinthSizeRow; i++)
-            {
-                for (int j = 0; j < GlobalConstants.LabyrinthSizeCol; j++)
-                {
-                    labyrinth[i, j] = randomInt.Next(2).ToString();
-                    if (labyrinth[i, j] == "0")
-                    {
-                        labyrinth[i, j] = GlobalConstants.EmptySpaceSymbol;
-                    }
-                    else
-                    {
-                        labyrinth[i, j] = GlobalConstants.FilledSpaceSymbol;
-                    }
-                }
-            }
-
-            labyrinth[playerX, playerY] = GlobalConstants.PlayerSymbol;
-        }
-
-        private static void DisplayLabyrinth(string[,] labyrinth)
-        {
-            for (int i = 0; i < GlobalConstants.LabyrinthSizeRow; i++)
-            {
-                for (int j = 0; j < GlobalConstants.LabyrinthSizeCol; j++)
-                {
-                    string currentCell = labyrinth[i, j];
-                    Console.Write(currentCell + ' ');
-                }
-
-                Console.WriteLine();
             }
         }
     }
