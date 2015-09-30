@@ -1,4 +1,4 @@
-﻿namespace Labyrinth.Players
+﻿namespace Labyrinth.Models
 {
     public class Player
     {
