@@ -33,29 +33,29 @@
             {
                 for (int j = 0; j < GlobalConstants.LabyrinthSizeCol; j++)
                 {
-                    board[i, j] = randomInt.Next(2).ToString();
-                    if (board[i, j] == "0")
+                    this.board[i, j] = randomInt.Next(2).ToString();
+                    if (this.board[i, j] == "0")
                     {
-                        board[i, j] = GlobalConstants.EmptySpaceSymbol;
+                        this.board[i, j] = GlobalConstants.EmptySpaceSymbol;
                     }
                     else
                     {
-                        board[i, j] = GlobalConstants.FilledSpaceSymbol;
+                        this.board[i, j] = GlobalConstants.FilledSpaceSymbol;
                     }
                 }
             }
 
-            board[GlobalConstants.PlayerStartPositionX, GlobalConstants.PlayerStartPositionY] = GlobalConstants.PlayerSymbol;
+            this.board[GlobalConstants.PlayerStartPositionX, GlobalConstants.PlayerStartPositionY] = GlobalConstants.PlayerSymbol;
         }
 
         public bool Check(int x, int y, string checkSymbol)
         {
-            return board[x, y] == checkSymbol;
+            return this.board[x, y] == checkSymbol;
         }
 
         public void Replace(int x, int y, string newSymbol)
         {
-            board[x, y] = newSymbol;
+            this.board[x, y] = newSymbol;
         }
 
         public void Display()
@@ -64,8 +64,9 @@
             {
                 for (int j = 0; j < GlobalConstants.LabyrinthSizeCol; j++)
                 {
-                    Console.Write(board[i, j] + " ");
+                    Console.Write(this.board[i, j] + " ");
                 }
+
                 Console.WriteLine();
             }
         }
