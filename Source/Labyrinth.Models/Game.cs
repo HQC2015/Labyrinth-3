@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Labyrinth.Common;
+    using Labyrinth.Models.Symbols;
 
     public class Game
     {
@@ -48,8 +49,12 @@
         private static void SolutionChecker(Board labyrinth, int playerX, int playerY)
         {
             bool checking = true;
-            if (labyrinth.Check(playerX + 1, playerY, GlobalConstants.FilledSpaceSymbol) && labyrinth.Check(playerX, playerY + 1, GlobalConstants.FilledSpaceSymbol) &&
-                labyrinth.Check(playerX - 1, playerY, GlobalConstants.FilledSpaceSymbol) && labyrinth.Check(playerX, playerY - 1, GlobalConstants.FilledSpaceSymbol))
+            WallSymbol wall = new WallSymbol();
+            FreeSymbol free = new FreeSymbol();
+            CheckSymbol check = new CheckSymbol();
+
+            if (labyrinth.Check(playerX + 1, playerY, wall) && labyrinth.Check(playerX, playerY + 1, wall) &&
+                labyrinth.Check(playerX - 1, playerY, wall) && labyrinth.Check(playerX, playerY - 1, wall))
             { // player is trapped
                 checking = false;
             }
@@ -58,24 +63,24 @@
             {
                 try
                 {
-                    if (labyrinth.Check(playerX + 1, playerY, GlobalConstants.EmptySpaceSymbol))
+                    if (labyrinth.Check(playerX + 1, playerY, free))
                     {
-                        labyrinth.Replace(playerX + 1, playerY, "0");
+                        labyrinth.Replace(playerX + 1, playerY, check);
                         playerX++;
                     }
-                    else if (labyrinth.Check(playerX, playerY + 1, GlobalConstants.EmptySpaceSymbol))
+                    else if (labyrinth.Check(playerX, playerY + 1, free))
                     {
-                        labyrinth.Replace(playerX, playerY + 1, "0");
+                        labyrinth.Replace(playerX, playerY + 1, check);
                         playerY++;
                     }
-                    else if (labyrinth.Check(playerX - 1, playerY, GlobalConstants.EmptySpaceSymbol))
+                    else if (labyrinth.Check(playerX - 1, playerY, free))
                     {
-                        labyrinth.Replace(playerX - 1, playerY, "0");
+                        labyrinth.Replace(playerX - 1, playerY, check);
                         playerX--;
                     }
-                    else if (labyrinth.Check(playerX, playerY - 1, GlobalConstants.EmptySpaceSymbol))
+                    else if (labyrinth.Check(playerX, playerY - 1, free))
                     {
-                        labyrinth.Replace(playerX, playerY - 1, "0");
+                        labyrinth.Replace(playerX, playerY - 1, check);
                         playerY--;
                     }
                     else
@@ -89,9 +94,9 @@
                     {
                         for (int j = 0; j < GlobalConstants.LabyrinthSizeCol; j++)
                         {
-                            if (labyrinth.Check(i, j, "0"))
+                            if (labyrinth.Check(i, j, check))
                             {
-                                labyrinth.Replace(i, j, GlobalConstants.EmptySpaceSymbol);
+                                labyrinth.Replace(i, j, free);
                             }
                         }
 
@@ -163,6 +168,8 @@
         private static void TypeCommand(Board labyrinth, bool flag, int x, int y)
         {
             currentScore = 0;
+            FreeSymbol free = new FreeSymbol();
+            PlayerSymbol player = new PlayerSymbol();
 
             while (flag)
             {
@@ -172,10 +179,10 @@
                 switch (inputCommand.ToLower())
                 {
                     case "d":
-                        if (labyrinth.Check(x + 1, y, GlobalConstants.EmptySpaceSymbol))
+                        if (labyrinth.Check(x + 1, y, free))
                         {
-                            labyrinth.Replace(x, y, GlobalConstants.EmptySpaceSymbol);
-                            labyrinth.Replace(x + 1, y, GlobalConstants.PlayerSymbol);
+                            labyrinth.Replace(x, y, free);
+                            labyrinth.Replace(x + 1, y, player);
                             x++;
                             currentScore++;
                         }
@@ -194,10 +201,10 @@
                         labyrinth.Display();
                         break;
                     case "u":
-                        if (labyrinth.Check(x - 1, y, GlobalConstants.EmptySpaceSymbol))
+                        if (labyrinth.Check(x - 1, y, free))
                         {
-                            labyrinth.Replace(x, y, GlobalConstants.EmptySpaceSymbol);
-                            labyrinth.Replace(x - 1, y, GlobalConstants.PlayerSymbol);
+                            labyrinth.Replace(x, y, free);
+                            labyrinth.Replace(x - 1, y, player);
                             x--;
                             currentScore++;
                         }
@@ -216,10 +223,10 @@
                         labyrinth.Display();
                         break;
                     case "r":
-                        if (labyrinth.Check(x, y + 1, GlobalConstants.EmptySpaceSymbol))
+                        if (labyrinth.Check(x, y + 1, free))
                         {
-                            labyrinth.Replace(x, y, GlobalConstants.EmptySpaceSymbol);
-                            labyrinth.Replace(x, y + 1, GlobalConstants.PlayerSymbol);
+                            labyrinth.Replace(x, y, free);
+                            labyrinth.Replace(x, y + 1, player);
                             y++;
                             currentScore++;
                         }
@@ -238,10 +245,10 @@
                         labyrinth.Display();
                         break;
                     case "l":
-                        if (labyrinth.Check(x, y - 1, GlobalConstants.EmptySpaceSymbol))
+                        if (labyrinth.Check(x, y - 1, free))
                         {
-                            labyrinth.Replace(x, y, GlobalConstants.EmptySpaceSymbol);
-                            labyrinth.Replace(x, y - 1, GlobalConstants.PlayerSymbol);
+                            labyrinth.Replace(x, y, free);
+                            labyrinth.Replace(x, y - 1, player);
                             y--;
                             currentScore++;
                         }

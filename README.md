@@ -209,24 +209,12 @@ Refactoring Documentation for Project “Labyrinth-3”
         }
 5.  Add Creational patterns
 
-	5.1 Singleton - added new class `Board.cs`
+	- Singleton - added new class `Board.cs`
+		* add method Check(int row, int col, string tobeCheckedFor
+		* add method Replace(int row, int col, string tobeCheckedFor
+		* add method Display()
+		* add method FillBoard()
 		
-		protected Board()
-        {
-        }
-
-        public static Board Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new Board();
-                }
-
-                return instance;
-            }
-        }
 	5.2
 
 	5.3
