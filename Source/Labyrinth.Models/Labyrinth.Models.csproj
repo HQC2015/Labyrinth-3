@@ -54,7 +54,8 @@
     <Compile Include="Manufactorers\FreeSymbolFactory.cs" />
     <Compile Include="Manufactorers\PlayerSymbolFactory.cs" />
     <Compile Include="Manufactorers\WallSymbolFactory.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Players\Player.cs" />
+    <Compile Include="Players\PlayerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Symbols\CheckSymbol.cs" />
     <Compile Include="Symbols\FreeSymbol.cs" />

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Labyrinth.Common;
     using Labyrinth.Models.Symbols;
+    using Labyrinth.Models.Players;
 
     public class Game
     {
@@ -113,27 +114,29 @@
             {
                 scores.Sort(delegate (Player s1, Player s2)
                 {
-                    return s1.Score.CompareTo(s2.Score);
+                    return s1.GetScore().CompareTo(s2.GetScore());
                 });
             }
 
             if (scores.Count == 5)
             {
-                if (scores[4].Score > currentScore)
+                if (scores[4].GetScore() > currentScore)
                 {
+                    var player = new Player();
                     scores.Remove(scores[4]);
                     Console.WriteLine(Messages.ScoreboardEnterNicknameMessage);
                     string name = Console.ReadLine();
-                    scores.Add(new Player(currentScore, name));
+                    scores.Add(player.Name(name).Score(currentScore));
                     ShowPlayer(scores);
                 }
             }
 
             if (scores.Count < 5)
             {
+                var player = new Player();
                 Console.WriteLine(Messages.ScoreboardEnterNicknameMessage);
                 string name = Console.ReadLine();
-                scores.Add(new Player(currentScore, name));
+                scores.Add(player.Name(name).Score(currentScore));
                 ShowPlayer(scores);
             }
 
@@ -151,14 +154,14 @@
             {
                 scores.Sort(delegate (Player s1, Player s2)
                 {
-                    return s1.Score.CompareTo(s2.Score);
+                    return s1.GetScore().CompareTo(s2.GetScore());
                 });
 
                 Console.WriteLine("Top 5: \n");
                 int i = 1;
                 scores.ForEach(delegate (Player s)
                 {
-                    Console.WriteLine(string.Format(i + ". {1} ---> {0} Score", s.Score, s.Name));
+                    Console.WriteLine(i + s.Print());
                     i++;
                 });
                 Console.WriteLine();
