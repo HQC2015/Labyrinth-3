@@ -50,8 +50,8 @@
         private static void SolutionChecker(Board labyrinth, int playerX, int playerY)
         {
             bool checking = true;
-            WallSymbol wall = new WallSymbol();
-            FreeSymbol free = new FreeSymbol();
+            FilledSpaceSymbol wall = new FilledSpaceSymbol();
+            EmptySpaceSymbol free = new EmptySpaceSymbol();
             CheckSymbol check = new CheckSymbol();
 
             if (labyrinth.Check(playerX + 1, playerY, wall) && labyrinth.Check(playerX, playerY + 1, wall) &&
@@ -171,7 +171,7 @@
         private static void TypeCommand(Board labyrinth, bool flag, int x, int y)
         {
             currentScore = 0;
-            FreeSymbol free = new FreeSymbol();
+            EmptySpaceSymbol free = new EmptySpaceSymbol();
             PlayerSymbol player = new PlayerSymbol();
 
             while (flag)

@@ -9,5 +9,6 @@
         public const string PlayerSymbol = "*";
         public const string EmptySpaceSymbol = "-";
         public const string FilledSpaceSymbol = "x";
+        public const string CheckSymbol = "0";
     }
 }

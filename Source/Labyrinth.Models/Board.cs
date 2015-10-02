@@ -1,12 +1,13 @@
 ﻿namespace Labyrinth.Models
 {
     using System;
-    using Labyrinth.Models.Manufactorers;
-    using Labyrinth.Models.Symbols;
+    using Manufacturers;
+    using Symbols;
 
     public class Board
     {
         private static Board instance;
+
         private WallSymbolFactory wallFactory = new WallSymbolFactory();
         private FreeSymbolFactory freeFactory = new FreeSymbolFactory();
         private CheckSymbolFactory checkFactory = new CheckSymbolFactory();
@@ -14,7 +15,7 @@
 
         private Symbol[,] board = new Symbol[GlobalConstants.LabyrinthSizeRow, GlobalConstants.LabyrinthSizeCol];
 
-        protected Board()
+        private Board()
         {
         }
 

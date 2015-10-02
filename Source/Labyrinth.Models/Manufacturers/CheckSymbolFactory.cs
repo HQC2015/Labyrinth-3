@@ -1,9 +1,8 @@
-﻿namespace Labyrinth.Models.Manufactorers
+﻿namespace Labyrinth.Models.Manufacturers
 {
-    using System;
-    using Labyrinth.Models.Symbols;
+    using Symbols;
 
-    public class CheckSymbolFactory : Manufactorer
+    public class CheckSymbolFactory : Manufacturer
     {
         public override Symbol ManufactureSymbol()
         {

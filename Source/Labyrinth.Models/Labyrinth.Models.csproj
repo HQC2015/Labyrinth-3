@@ -49,19 +49,19 @@
   <ItemGroup>
     <Compile Include="Board.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="Manufactorers\CheckSymbolFactory.cs" />
-    <Compile Include="Manufactorers\Manufactorer.cs" />
-    <Compile Include="Manufactorers\FreeSymbolFactory.cs" />
-    <Compile Include="Manufactorers\PlayerSymbolFactory.cs" />
-    <Compile Include="Manufactorers\WallSymbolFactory.cs" />
+    <Compile Include="Manufacturers\CheckSymbolFactory.cs" />
+    <Compile Include="Manufacturers\Manufacturer.cs" />
+    <Compile Include="Manufacturers\FreeSymbolFactory.cs" />
+    <Compile Include="Manufacturers\PlayerSymbolFactory.cs" />
+    <Compile Include="Manufacturers\WallSymbolFactory.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Players\PlayerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Symbols\CheckSymbol.cs" />
-    <Compile Include="Symbols\FreeSymbol.cs" />
+    <Compile Include="Symbols\EmptySpaceSymbol.cs" />
     <Compile Include="Symbols\PlayerSymbol.cs" />
     <Compile Include="Symbols\Symbol.cs" />
-    <Compile Include="Symbols\WallSymbol.cs" />
+    <Compile Include="Symbols\FilledSpaceSymbol.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

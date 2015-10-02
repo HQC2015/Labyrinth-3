@@ -1,9 +1,29 @@
 ﻿namespace Labyrinth.Models.Symbols
 {
-    using System;
-
     public abstract class Symbol //IComparable
     {
-        public string Print { get; set; }
+        private string symbolValue;
+
+        protected Symbol(string val)
+        {
+            this.Value = val;
+        }
+
+        public string Value
+        {
+            get
+            {
+                return this.symbolValue;
+            }
+            private set
+            {
+                this.symbolValue = value;
+            }
+        }
+
+        public override string ToString()
+        {
+            return this.Value;
+        }
     }
 }

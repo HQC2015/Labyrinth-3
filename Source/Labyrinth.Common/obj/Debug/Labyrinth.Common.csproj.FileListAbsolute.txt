@@ -1,6 +1,0 @@
-D:\Telerik\Labyrinth-3\Source\Labyrinth.Common\bin\Debug\Labyrinth.Common.dll.config
-D:\Telerik\Labyrinth-3\Source\Labyrinth.Common\bin\Debug\Labyrinth.Common.dll
-D:\Telerik\Labyrinth-3\Source\Labyrinth.Common\bin\Debug\Labyrinth.Common.pdb
-D:\Telerik\Labyrinth-3\Source\Labyrinth.Common\obj\Debug\Labyrinth.Common.csprojResolveAssemblyReference.cache
-D:\Telerik\Labyrinth-3\Source\Labyrinth.Common\obj\Debug\Labyrinth.Common.dll
-D:\Telerik\Labyrinth-3\Source\Labyrinth.Common\obj\Debug\Labyrinth.Common.pdb
