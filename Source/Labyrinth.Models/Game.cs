@@ -5,6 +5,7 @@
     using Labyrinth.Common;
     using Labyrinth.Models.Symbols;
     using Labyrinth.Models.Players;
+    using Common.Enum;
 
     public class Game
     {
@@ -50,12 +51,12 @@
         private static void SolutionChecker(Board labyrinth, int playerX, int playerY)
         {
             bool checking = true;
-            FilledSpaceSymbol wall = new FilledSpaceSymbol();
-            EmptySpaceSymbol free = new EmptySpaceSymbol();
-            CheckSymbol check = new CheckSymbol();
+            SymbolFactory symbolFactory = new SymbolFactory();
 
-            if (labyrinth.Check(playerX + 1, playerY, wall) && labyrinth.Check(playerX, playerY + 1, wall) &&
-                labyrinth.Check(playerX - 1, playerY, wall) && labyrinth.Check(playerX, playerY - 1, wall))
+            if (labyrinth.Check(playerX + 1, playerY, symbolFactory.GetSymbol(SymbolsEnum.FilledSpace)) &&
+                labyrinth.Check(playerX, playerY + 1, symbolFactory.GetSymbol(SymbolsEnum.FilledSpace)) &&
+                labyrinth.Check(playerX - 1, playerY, symbolFactory.GetSymbol(SymbolsEnum.FilledSpace)) &&
+                labyrinth.Check(playerX, playerY - 1, symbolFactory.GetSymbol(SymbolsEnum.FilledSpace)))
             { // player is trapped
                 checking = false;
             }
@@ -64,24 +65,24 @@
             {
                 try
                 {
-                    if (labyrinth.Check(playerX + 1, playerY, free))
+                    if (labyrinth.Check(playerX + 1, playerY, symbolFactory.GetSymbol(SymbolsEnum.EmptySpace)))
                     {
-                        labyrinth.Replace(playerX + 1, playerY, check);
+                        labyrinth.Replace(playerX + 1, playerY, symbolFactory.GetSymbol(SymbolsEnum.Check));
                         playerX++;
                     }
-                    else if (labyrinth.Check(playerX, playerY + 1, free))
+                    else if (labyrinth.Check(playerX, playerY + 1, symbolFactory.GetSymbol(SymbolsEnum.EmptySpace)))
                     {
-                        labyrinth.Replace(playerX, playerY + 1, check);
+                        labyrinth.Replace(playerX, playerY + 1, symbolFactory.GetSymbol(SymbolsEnum.Check));
                         playerY++;
                     }
-                    else if (labyrinth.Check(playerX - 1, playerY, free))
+                    else if (labyrinth.Check(playerX - 1, playerY, symbolFactory.GetSymbol(SymbolsEnum.EmptySpace)))
                     {
-                        labyrinth.Replace(playerX - 1, playerY, check);
+                        labyrinth.Replace(playerX - 1, playerY, symbolFactory.GetSymbol(SymbolsEnum.Check));
                         playerX--;
                     }
-                    else if (labyrinth.Check(playerX, playerY - 1, free))
+                    else if (labyrinth.Check(playerX, playerY - 1, symbolFactory.GetSymbol(SymbolsEnum.EmptySpace)))
                     {
-                        labyrinth.Replace(playerX, playerY - 1, check);
+                        labyrinth.Replace(playerX, playerY - 1, symbolFactory.GetSymbol(SymbolsEnum.Check));
                         playerY--;
                     }
                     else
@@ -95,9 +96,9 @@
                     {
                         for (int j = 0; j < GlobalConstants.LabyrinthSizeCol; j++)
                         {
-                            if (labyrinth.Check(i, j, check))
+                            if (labyrinth.Check(i, j, symbolFactory.GetSymbol(SymbolsEnum.Check)))
                             {
-                                labyrinth.Replace(i, j, free);
+                                labyrinth.Replace(i, j, symbolFactory.GetSymbol(SymbolsEnum.EmptySpace));
                             }
                         }
 
@@ -122,21 +123,25 @@
             {
                 if (scores[4].GetScore() > currentScore)
                 {
-                    var player = new Player();
-                    scores.Remove(scores[4]);
                     Console.WriteLine(Messages.ScoreboardEnterNicknameMessage);
                     string name = Console.ReadLine();
-                    scores.Add(player.Name(name).Score(currentScore));
+                    Player player = new Player()
+                        .SetName(name)
+                        .SetScore(currentScore);
+                    scores.Remove(scores[4]);
+                    scores.Add(player);
                     ShowPlayer(scores);
                 }
             }
 
             if (scores.Count < 5)
             {
-                var player = new Player();
                 Console.WriteLine(Messages.ScoreboardEnterNicknameMessage);
                 string name = Console.ReadLine();
-                scores.Add(player.Name(name).Score(currentScore));
+                Player player = new Player()
+                    .SetName(name)
+                    .SetScore(currentScore);
+                scores.Add(player);
                 ShowPlayer(scores);
             }
 

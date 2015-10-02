@@ -1,19 +1,17 @@
 ﻿namespace Labyrinth.Models
 {
     using System;
-    using Manufacturers;
     using Symbols;
+    using Contracts;
+    using Common.Enum;
 
     public class Board
     {
         private static Board instance;
 
-        private WallSymbolFactory wallFactory = new WallSymbolFactory();
-        private FreeSymbolFactory freeFactory = new FreeSymbolFactory();
-        private CheckSymbolFactory checkFactory = new CheckSymbolFactory();
-        private PlayerSymbolFactory playerFactory = new PlayerSymbolFactory();
+        private readonly ISymbol[,] board = new ISymbol[GlobalConstants.LabyrinthSizeRow, GlobalConstants.LabyrinthSizeCol];
 
-        private Symbol[,] board = new Symbol[GlobalConstants.LabyrinthSizeRow, GlobalConstants.LabyrinthSizeCol];
+        private readonly SymbolFactory symbolFactory = new SymbolFactory();
 
         private Board()
         {
@@ -45,25 +43,25 @@
                     //Console.WriteLine(reminder);
                     if (reminder == "0")
                     {
-                        this.board[i, j] = freeFactory.ManufactureSymbol();
+                        this.board[i, j] = symbolFactory.GetSymbol(SymbolsEnum.EmptySpace);
                     }
                     else
                     {
-                        this.board[i, j] = wallFactory.ManufactureSymbol();
+                        this.board[i, j] = symbolFactory.GetSymbol(SymbolsEnum.FilledSpace);
                     }
                 }
             }
 
-            this.board[GlobalConstants.PlayerStartPositionX, GlobalConstants.PlayerStartPositionY] = playerFactory.ManufactureSymbol();
+            this.board[GlobalConstants.PlayerStartPositionX, GlobalConstants.PlayerStartPositionY] = symbolFactory.GetSymbol(SymbolsEnum.Player);
         }
 
-        public bool Check(int x, int y, Symbol checkSymbol)
+        public bool Check(int x, int y, ISymbol checkSymbol)
         {
-            bool rem = this.board[x, y].ToString() == checkSymbol.ToString();
+            bool rem = this.board[x, y].GetValue() == checkSymbol.GetValue();
             return rem;
         }
 
-        public void Replace(int x, int y, Symbol newSymbol)
+        public void Replace(int x, int y, ISymbol newSymbol)
         {
             this.board[x, y] = newSymbol;
         }
@@ -74,7 +72,7 @@
             {
                 for (int j = 0; j < GlobalConstants.LabyrinthSizeCol; j++)
                 {
-                    Console.Write(this.board[i, j].ToString() + " ");
+                    Console.Write(this.board[i, j].GetValue() + " ");
                 }
 
                 Console.WriteLine();

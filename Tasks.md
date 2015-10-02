@@ -1,9 +1,10 @@
 # TODOs 
 
 ## Creational patterns 
-* Implement factory method for player
-* Implement singleton for game board DONEDONEDONE 
-* Implement prototype to import tiles and walls in game board
+* Implement Fluent Interface for player DONEDONEDONE
+* Implement singleton for game board DONEDONEDONE
+* Implement prototype for tiles in game board ( THIS CANNOT BE DONE FOR TILES, MAYBE WE SHOULD COMBINE PROTOTYPE + MEMENTO FOR GAME )
+* Implement Lazy Initialization for symbols DONEDONEDONE
 
 ## Behaviour patterns 
 * Implement Visitor for scoreboard
@@ -14,7 +15,7 @@
 
 * Implement Proxy or adapter for filling the board
 * Implement Facade for engine
-* Implement Flyweight
+* Implement Flyweight for Symbols DONEDONEDONE
 
 ## Unit tests 
 * Work for anyone who want it :)

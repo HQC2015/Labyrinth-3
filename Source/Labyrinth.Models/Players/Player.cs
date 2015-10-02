@@ -4,13 +4,13 @@
     {
         private readonly PlayerContext context = new PlayerContext();
 
-        public Player Name (string name)
+        public Player SetName(string name)
         {
             this.context.Name = name;
             return this;
         }
 
-        public Player Score (int score)
+        public Player SetScore(int score)
         {
             this.context.Score = score;
             return this;

@@ -1,27 +1,17 @@
 ﻿namespace Labyrinth.Models.Symbols
 {
-    public abstract class Symbol //IComparable
-    {
-        private string symbolValue;
+    using Contracts;
 
-        protected Symbol(string val)
+    public abstract class Symbol : ISymbol
+    {
+        protected Symbol(char val)
         {
             this.Value = val;
         }
 
-        public string Value
-        {
-            get
-            {
-                return this.symbolValue;
-            }
-            private set
-            {
-                this.symbolValue = value;
-            }
-        }
+        private char Value { get; set; }
 
-        public override string ToString()
+        public char GetValue()
         {
             return this.Value;
         }

@@ -48,12 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
+    <Compile Include="Contracts\ISymbol.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="Manufacturers\CheckSymbolFactory.cs" />
-    <Compile Include="Manufacturers\Manufacturer.cs" />
-    <Compile Include="Manufacturers\FreeSymbolFactory.cs" />
-    <Compile Include="Manufacturers\PlayerSymbolFactory.cs" />
-    <Compile Include="Manufacturers\WallSymbolFactory.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Players\PlayerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,13 +58,12 @@
     <Compile Include="Symbols\PlayerSymbol.cs" />
     <Compile Include="Symbols\Symbol.cs" />
     <Compile Include="Symbols\FilledSpaceSymbol.cs" />
+    <Compile Include="Symbols\SymbolFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Contracts\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Labyrinth.Common\Labyrinth.Common.csproj">
       <Project>{e2479e86-babf-434d-858b-3986e4d0330a}</Project>
