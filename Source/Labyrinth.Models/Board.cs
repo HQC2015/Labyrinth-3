@@ -7,7 +7,7 @@
 
     public class Board
     {
-        private static Board instance;
+        private static readonly Lazy<Board> instance = new Lazy<Board>(() => new Board());
 
         private readonly ISymbol[,] board = new ISymbol[GlobalConstants.LabyrinthSizeRow, GlobalConstants.LabyrinthSizeCol];
 
@@ -21,12 +21,7 @@
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new Board();
-                }
-
-                return instance;
+                return instance.Value;
             }
         }
 
