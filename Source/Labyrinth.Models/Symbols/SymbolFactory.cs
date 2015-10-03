@@ -5,25 +5,17 @@
     using Labyrinth.Models.Contracts;
     using Labyrinth.Common.Enum;
 
-    public class SymbolFactory
+    public static class SymbolFactory
     {
-        private readonly Dictionary<SymbolsEnum, ISymbol> symbols = new Dictionary<SymbolsEnum, ISymbol>();
+        private static readonly Dictionary<SymbolsEnum, ISymbol> symbols = new Dictionary<SymbolsEnum, ISymbol>();
 
-        public int NumberOfSymbols
-        {
-            get
-            {
-                return this.symbols.Count;
-            }
-        }
-
-        public ISymbol GetSymbol(SymbolsEnum key)
+        public static ISymbol GetSymbol(SymbolsEnum key)
         {
             // Uses "lazy initialization"
             ISymbol symbol = null;
-            if (this.symbols.ContainsKey(key))
+            if (symbols.ContainsKey(key))
             {
-                symbol = this.symbols[key];
+                symbol = symbols[key];
             }
             else
             {
@@ -45,7 +37,7 @@
                         throw new InvalidOperationException("Wrong key for the SymbolFactory.GetSymbol(SymbolsEnum)");
                 }
 
-                this.symbols.Add(key, symbol);
+                symbols.Add(key, symbol);
             }
 
             return symbol;

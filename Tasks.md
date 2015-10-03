@@ -5,6 +5,7 @@
 * Implement singleton for game board DONEDONEDONE
 * Implement prototype for tiles in game board ( THIS CANNOT BE DONE FOR TILES, MAYBE WE SHOULD COMBINE PROTOTYPE + MEMENTO FOR GAME )
 * Implement Lazy Initialization for symbols DONEDONEDONE
+* Implement Lazy Load for Board DONEDONEDONE
 
 ## Behaviour patterns 
 * Implement Visitor for scoreboard
@@ -12,7 +13,6 @@
 * Implement Null Object 
 
 ## Structural patterns
-
 * Implement Proxy or adapter for filling the board
 * Implement Facade for engine
 * Implement Flyweight for Symbols DONEDONEDONE

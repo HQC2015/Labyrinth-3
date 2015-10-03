@@ -1,6 +1,6 @@
 ﻿namespace Labyrinth.Models.Symbols
 {
-    using Contracts;
+    using Labyrinth.Models.Contracts;
 
     public abstract class Symbol : ISymbol
     {

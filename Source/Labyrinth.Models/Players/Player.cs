@@ -1,5 +1,7 @@
 ﻿namespace Labyrinth.Models.Players
 {
+    using Labyrinth.Models.Contracts;
+
     public class Player
     {
         private readonly PlayerContext context = new PlayerContext();
@@ -8,6 +10,11 @@
         {
             this.context.Name = name;
             return this;
+        }
+
+        public string GetName()
+        {
+            return this.context.Name;
         }
 
         public Player SetScore(int score)
