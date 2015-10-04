@@ -8,13 +8,14 @@
     using Labyrinth.Models.Symbols;
     using Labyrinth.Common;
     using Labyrinth.Common.Enum;
+    using Labyrinth.Logic.Commands;
 
     public class Game
     {
         private readonly IRenderer renderer;
-        private readonly IInputHandler inputHandler;
+        //private readonly IInputHandler inputHandler;
         private readonly IGameRule gameRules;
-        private readonly ICommandExecutor commandExecutor;
+        //private readonly ICommandExecutor commandExecutor;
 
         // .............................................................
 
@@ -26,12 +27,12 @@
 
         private static int currentScore;
 
-        public Game(IRenderer renderer, IInputHandler inputHandler, IGameRule gameRules, ICommandExecutor commandExecutor)
+        public Game(IRenderer renderer, IGameRule gameRules)
         {
             this.renderer = renderer;
-            this.inputHandler = inputHandler;
+            //this.inputHandler = inputHandler;
             this.gameRules = gameRules;
-            this.commandExecutor = commandExecutor;
+            //this.commandExecutor = commandExecutor;
         }
 
         public void Start()
@@ -54,6 +55,7 @@
 
                 this.renderer.RenderBoard(Board.Instance);
                 TypeCommand(Board.Instance, commandListener, GlobalConstants.PlayerStartPositionX, GlobalConstants.PlayerStartPositionY);
+                
 
                 // used for adding score only when game is finished naturally and not by the restart command.
                 while (flag)

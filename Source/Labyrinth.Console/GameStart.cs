@@ -8,11 +8,11 @@
         private static void Main(string[] args)
         {
             var renderer = new Renderer();
-            var inputHandler = new InputHandler();
+            //var inputHandler = new InputHandler();
             var gameRules = new StandartGameRule();
-            var commandExecutor = new CommandExecutor();
+            //var commandExecutor = new CommandExecutor();
 
-            var game = new Game(renderer,inputHandler,gameRules,commandExecutor);
+            var game = new Game(renderer,gameRules);
             game.Start();
         }
     }

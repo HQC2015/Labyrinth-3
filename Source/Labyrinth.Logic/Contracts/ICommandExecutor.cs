@@ -6,6 +6,8 @@
 
     public interface ICommandExecutor
     {
-        void Exec(string command, Board board, Player player);
+        void Execute();
+
+        void UnExecute();
     }
 }

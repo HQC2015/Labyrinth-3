@@ -47,7 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandExecutor.cs" />
+    <Compile Include="Commands\CommandExecutor.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\MoveLogic.cs" />
     <Compile Include="Contracts\ICommandExecutor.cs" />
     <Compile Include="Contracts\IGameRule.cs" />
     <Compile Include="Contracts\IRenderer.cs" />
