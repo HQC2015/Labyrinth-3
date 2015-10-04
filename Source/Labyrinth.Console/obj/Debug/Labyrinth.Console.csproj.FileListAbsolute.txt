@@ -1,0 +1,12 @@
+E:\Telerik\Labyrinth-3\Source\Labyrinth.Console\bin\Debug\Labyrinth.Console.exe.config
+E:\Telerik\Labyrinth-3\Source\Labyrinth.Console\bin\Debug\Labyrinth.Console.exe
+E:\Telerik\Labyrinth-3\Source\Labyrinth.Console\bin\Debug\Labyrinth.Console.pdb
+E:\Telerik\Labyrinth-3\Source\Labyrinth.Console\bin\Debug\Labyrinth.Common.dll
+E:\Telerik\Labyrinth-3\Source\Labyrinth.Console\bin\Debug\Labyrinth.Logic.dll
+E:\Telerik\Labyrinth-3\Source\Labyrinth.Console\bin\Debug\Labyrinth.Models.dll
+E:\Telerik\Labyrinth-3\Source\Labyrinth.Console\bin\Debug\Labyrinth.Common.pdb
+E:\Telerik\Labyrinth-3\Source\Labyrinth.Console\bin\Debug\Labyrinth.Logic.pdb
+E:\Telerik\Labyrinth-3\Source\Labyrinth.Console\bin\Debug\Labyrinth.Models.pdb
+E:\Telerik\Labyrinth-3\Source\Labyrinth.Console\obj\Debug\Labyrinth.Console.csprojResolveAssemblyReference.cache
+E:\Telerik\Labyrinth-3\Source\Labyrinth.Console\obj\Debug\Labyrinth.Console.exe
+E:\Telerik\Labyrinth-3\Source\Labyrinth.Console\obj\Debug\Labyrinth.Console.pdb
