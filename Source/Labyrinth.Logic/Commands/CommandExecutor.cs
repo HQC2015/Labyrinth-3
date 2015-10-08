@@ -5,11 +5,12 @@
     using Labyrinth.Models.Contracts;
     using Models.Players;
     using Models;
+    using Interfaces;
 
     public class CommandExecutor : ICommandExecutor
     {
-        private string command;
-        private MoveLogic moveLogic;
+        private readonly string command;
+        private readonly MoveLogic moveLogic;
 
         public CommandExecutor(string command, MoveLogic moveLogic)
         {

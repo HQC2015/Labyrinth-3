@@ -10,3 +10,15 @@ E:\Telerik\Labyrinth-3\Source\Labyrinth.Console\bin\Debug\Labyrinth.Models.pdb
 E:\Telerik\Labyrinth-3\Source\Labyrinth.Console\obj\Debug\Labyrinth.Console.csprojResolveAssemblyReference.cache
 E:\Telerik\Labyrinth-3\Source\Labyrinth.Console\obj\Debug\Labyrinth.Console.exe
 E:\Telerik\Labyrinth-3\Source\Labyrinth.Console\obj\Debug\Labyrinth.Console.pdb
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Console\bin\Debug\Labyrinth.Console.exe.config
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Console\obj\Debug\Labyrinth.Console.exe
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Console\obj\Debug\Labyrinth.Console.pdb
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Console\obj\Debug\Labyrinth.Console.csprojResolveAssemblyReference.cache
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Console\bin\Debug\Labyrinth.Console.exe
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Console\bin\Debug\Labyrinth.Console.pdb
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Console\bin\Debug\Labyrinth.Common.dll
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Console\bin\Debug\Labyrinth.Logic.dll
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Console\bin\Debug\Labyrinth.Models.dll
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Console\bin\Debug\Labyrinth.Common.pdb
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Console\bin\Debug\Labyrinth.Logic.pdb
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Console\bin\Debug\Labyrinth.Models.pdb

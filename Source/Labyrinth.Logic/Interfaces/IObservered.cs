@@ -1,4 +1,4 @@
-﻿namespace Labyrinth.Logic.Observer
+﻿namespace Labyrinth.Logic.Interfaces
 {
     public interface IObservered
     {

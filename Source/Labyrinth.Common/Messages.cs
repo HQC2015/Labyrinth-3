@@ -2,6 +2,7 @@
 {
     public class Messages
     {
+        public const string TypeOfGameMessage = "Please enter 'standart' for standart game or 'unique' for a different game.";
         public const string WelcomeMessage = "Welcome to \"Labyrinth\" game, where you try to escape!";
         public const string GameCommandsMessage = "Use 'top' to view the top players\n'restart' to start a new game\n'exit' to quit the game.";
         public const string EnterMoveMessage = "Enter your move (L=left, R=right, D=down, U=up): ";

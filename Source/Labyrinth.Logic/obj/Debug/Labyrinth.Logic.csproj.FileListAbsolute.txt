@@ -8,3 +8,13 @@ E:\Telerik\Labyrinth-3\Source\Labyrinth.Logic\bin\Debug\Labyrinth.Models.pdb
 E:\Telerik\Labyrinth-3\Source\Labyrinth.Logic\obj\Debug\Labyrinth.Logic.csprojResolveAssemblyReference.cache
 E:\Telerik\Labyrinth-3\Source\Labyrinth.Logic\obj\Debug\Labyrinth.Logic.dll
 E:\Telerik\Labyrinth-3\Source\Labyrinth.Logic\obj\Debug\Labyrinth.Logic.pdb
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Logic\obj\Debug\Labyrinth.Logic.csprojResolveAssemblyReference.cache
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Logic\obj\Debug\Labyrinth.Logic.dll
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Logic\obj\Debug\Labyrinth.Logic.pdb
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Logic\bin\Debug\Labyrinth.Logic.dll.config
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Logic\bin\Debug\Labyrinth.Logic.dll
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Logic\bin\Debug\Labyrinth.Logic.pdb
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Logic\bin\Debug\Labyrinth.Common.dll
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Logic\bin\Debug\Labyrinth.Models.dll
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Logic\bin\Debug\Labyrinth.Common.pdb
+C:\Users\Ognyan\Documents\GitHub\Labyrinth-3\Source\Labyrinth.Logic\bin\Debug\Labyrinth.Models.pdb

@@ -1,5 +1,6 @@
 ﻿using Labyrinth.Common;
 using Labyrinth.Logic.Contracts;
+using Labyrinth.Logic.Interfaces;
 using Labyrinth.Models;
 using System;
 using System.Collections.Generic;
@@ -8,20 +9,23 @@ namespace Labyrinth.Logic.Commands
 {
     public class Command
     {
-        private List<string> commands = new List<string>();
-        private int currentCommandIndex;
-        private string command;
-        private IInputHandler inputHandler;
+        private readonly List<string> commands;
+        private readonly MoveLogic moveLogic;
 
-        public Command(IInputHandler inputHandler)
+        private int currentCommandIndex;
+        private string currentCommand;
+        private CommandExecutor commandExecutor;
+
+        public Command(MoveLogic moveLogic)
         {
-            this.inputHandler = inputHandler;
+            this.commands = new List<string>();
+            this.moveLogic = moveLogic;
         }
 
-        public void Start(MoveLogic moveLogic)
+        public void ProcessCommand(string command)
         {
-            this.command = inputHandler.GetInput().ToLower();
-            switch (this.command)
+            this.currentCommand = command;
+            switch (command)
             {
                 case "top":
                     this.Top();
@@ -33,10 +37,10 @@ namespace Labyrinth.Logic.Commands
                     this.Restart();
                     break;
                 case "b":
-                    this.Undo(moveLogic);
+                    this.Undo(this.moveLogic);
                     break;
                 case "f":
-                    this.Redo(moveLogic);
+                    this.Redo(this.moveLogic);
                     break;
                 case "d":
                 case "u":
@@ -57,17 +61,17 @@ namespace Labyrinth.Logic.Commands
 
         public string Restart()
         {
-            return this.command;
+            return this.currentCommand;
         }
 
         public string Exit()
         {
-            return this.command;
+            return this.currentCommand;
         }
 
         public string Top()
         {
-            return this.command;
+            return this.currentCommand;
         }
 
         public void Redo(MoveLogic moveLogic)
@@ -75,8 +79,8 @@ namespace Labyrinth.Logic.Commands
             if (this.currentCommandIndex < this.commands.Count - 1)
             {
                 var command = this.commands[this.currentCommandIndex++];
-                CommandExecutor commandForExecution = new CommandExecutor(command, moveLogic);
-                commandForExecution.Execute();
+                this.commandExecutor = new CommandExecutor(command, moveLogic);
+                this.commandExecutor.Execute();
                 this.currentCommandIndex++;
             }
         }
@@ -86,18 +90,18 @@ namespace Labyrinth.Logic.Commands
             if (this.currentCommandIndex > 0)
             {
                 var command = this.commands[--this.currentCommandIndex];
-                CommandExecutor commandForExecution = new CommandExecutor(command, moveLogic);
-                commandForExecution.UnExecute();
+                this.commandExecutor = new CommandExecutor(command, moveLogic);
+                this.commandExecutor.UnExecute();
                 this.currentCommandIndex--;
             }
         }
 
         public void Compute(MoveLogic moveLogic)
         {
-            CommandExecutor commandForExecution = new CommandExecutor(command, moveLogic);
-            commandForExecution.Execute();
+            this.commandExecutor = new CommandExecutor(this.currentCommand, moveLogic);
+            this.commandExecutor.Execute();
 
-            this.commands.Add(command);
+            this.commands.Add(this.currentCommand);
             this.currentCommandIndex++;
         }
     }

@@ -2,8 +2,9 @@
 {
     using Models;
     using Labyrinth.Models.Contracts;
+    using Models.Players;
 
-    public interface IGameRule
+    public interface IBoardSetup
     {
         void SetGame(Board board);
     }

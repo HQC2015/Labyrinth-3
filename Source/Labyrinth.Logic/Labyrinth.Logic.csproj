@@ -49,16 +49,19 @@
   <ItemGroup>
     <Compile Include="Commands\CommandExecutor.cs" />
     <Compile Include="Commands\Command.cs" />
-    <Compile Include="Commands\MoveLogic.cs" />
-    <Compile Include="Contracts\ICommandExecutor.cs" />
-    <Compile Include="Contracts\IGameRule.cs" />
+    <Compile Include="MoveLogic\StandartMoveLogic.cs" />
+    <Compile Include="Interfaces\ICommandExecutor.cs" />
+    <Compile Include="Contracts\IBoardSetup.cs" />
+    <Compile Include="Contracts\IEngine.cs" />
     <Compile Include="Contracts\IRenderer.cs" />
     <Compile Include="Contracts\IInputHandler.cs" />
+    <Compile Include="Engine.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="Observer\PlayerCoordinates.cs" />
-    <Compile Include="Contracts\IObservered.cs" />
+    <Compile Include="MoveLogic\MoveLogic.cs" />
+    <Compile Include="Observer\PlayerObserver.cs" />
+    <Compile Include="Interfaces\IObservered.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rules\StandartGameRule.cs" />
+    <Compile Include="Rules\StandartBoardSetup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

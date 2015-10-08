@@ -1,19 +1,20 @@
 ﻿namespace Labyrinth.Logic.Observer
 {
+    using Interfaces;
     using System.Collections.Generic;
 
-    public class PlayerCoordinates
+    public class PlayerObserver
     {
-        private List<IObservered> listeners = new List<IObservered>();
+        private readonly List<IObservered> listeners = new List<IObservered>();
         private int currentScore;
         private int playerX;
         private int playerY;
 
-        public PlayerCoordinates()
+        public PlayerObserver()
         {
         }
 
-        public PlayerCoordinates(int currentScore, int playerX, int playerY)
+        public PlayerObserver(int currentScore, int playerX, int playerY)
         {
             this.currentScore = currentScore;
             this.playerX = playerX;
