@@ -10,7 +10,7 @@
 ## Behaviour patterns 
 * Implement Visitor for scoreboard
 * Implement Command for playes moves 
-* Implement Null Object 
+* Implement Observer for player coordinates and score 
 
 ## Structural patterns
 * Implement Proxy or adapter for filling the board

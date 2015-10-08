@@ -7,10 +7,10 @@
     {
         private string command;
 
-        public InputHandler()
-        {
-            this.Command = Console.ReadLine();
-        }
+        //public InputHandler()
+        //{
+        //    this.Command = Console.ReadLine();
+        //}
 
         public string Command
         {

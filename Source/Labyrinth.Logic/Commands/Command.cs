@@ -8,22 +8,20 @@ namespace Labyrinth.Logic.Commands
 {
     public class Command
     {
-        private MoveLogic moveLogic;
         private List<string> commands = new List<string>();
         private int currentCommandIndex;
         private string command;
         private IInputHandler inputHandler;
-        private IRenderer renderer;
 
-        public Command()
+        public Command(IInputHandler inputHandler)
         {
-            this.command = inputHandler.GetInput();
+            this.inputHandler = inputHandler;
         }
 
-        public void Start()
+        public void Start(MoveLogic moveLogic)
         {
-            renderer.RenderMessage(Messages.EnterMoveMessage);
-            switch (this.command.ToLower())
+            this.command = inputHandler.GetInput().ToLower();
+            switch (this.command)
             {
                 case "top":
                     this.Top();
@@ -35,35 +33,44 @@ namespace Labyrinth.Logic.Commands
                     this.Restart();
                     break;
                 case "b":
-                    this.Undo();
+                    this.Undo(moveLogic);
                     break;
                 case "f":
-                    this.Redo();
+                    this.Redo(moveLogic);
+                    break;
+                case "d":
+                case "u":
+                case "l":
+                case "r":
+                    this.Compute(moveLogic);
                     break;
                 default:
-                    this.renderer.RenderMessage("Invalid command!");
+                    this.Invalid();
                     break;
             }
         }
 
-        public void Restart()
+        public string Invalid()
         {
-
+            return "Invalid command";
         }
 
-        public void Exit()
+        public string Restart()
         {
-
+            return this.command;
         }
 
-        public void Top()
+        public string Exit()
         {
-            this.renderer.RenderScoreboard(Scoreboard.Instance);
-            this.renderer.RenderMessage("\n");
-            this.renderer.RenderBoard(Board.Instance);
+            return this.command;
         }
 
-        public void Redo()
+        public string Top()
+        {
+            return this.command;
+        }
+
+        public void Redo(MoveLogic moveLogic)
         {
             if (this.currentCommandIndex < this.commands.Count - 1)
             {
@@ -74,7 +81,7 @@ namespace Labyrinth.Logic.Commands
             }
         }
 
-        public void Undo()
+        public void Undo(MoveLogic moveLogic)
         {
             if (this.currentCommandIndex > 0)
             {
@@ -85,7 +92,7 @@ namespace Labyrinth.Logic.Commands
             }
         }
 
-        public void Compute()
+        public void Compute(MoveLogic moveLogic)
         {
             CommandExecutor commandForExecution = new CommandExecutor(command, moveLogic);
             commandForExecution.Execute();

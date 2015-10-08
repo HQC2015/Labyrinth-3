@@ -55,6 +55,8 @@
     <Compile Include="Contracts\IRenderer.cs" />
     <Compile Include="Contracts\IInputHandler.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="Observer\PlayerCoordinates.cs" />
+    <Compile Include="Contracts\IObservered.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rules\StandartGameRule.cs" />
   </ItemGroup>
