@@ -20,11 +20,9 @@
 
         // .............................................................
 
-        private static bool mazeHasSolution; // shows if the random generated labyrinth has an exit route.
-        private static bool commandListener; // waiting for input.
-
-        private static bool playing; // game in progress.
-        private static readonly bool flag; // used to prevent adding scores when restarting the game.
+        private bool mazeHasSolution; // shows if the random generated labyrinth has an exit route.
+        private bool playing; // game in progress.
+        private bool gameend;
 
         private int currentScore;
         private int playerX;
@@ -45,12 +43,10 @@
         public void Start()
         {
             this.moveLogic.Observer.Attach(this);
-            this.moveLogic.Observer.Attach(moveLogic);
+            this.moveLogic.Observer.Attach(this.moveLogic);
             this.moveLogic.Observer.CurrentScore = this.currentScore;
             this.moveLogic.Observer.PlayerX = GlobalConstants.PlayerStartPositionX;
             this.moveLogic.Observer.PlayerY = GlobalConstants.PlayerStartPositionY;
-
-            commandListener = playing = true;
 
             this.renderer.RenderMessage(Messages.WelcomeMessage);
             this.renderer.RenderMessage(Messages.GameCommandsMessage);
@@ -63,24 +59,24 @@
 
             this.renderer.RenderBoard(Board.Instance);
 
+            playing = true;
             while (playing)
             {
                 this.renderer.RenderMessage(Messages.EnterMoveMessage);
                 var userInput = this.inputHandler.GetInput();
-                this.command.ProcessCommand(userInput);
-                if (command.GetType() == typeof(string))
+                if (userInput.Length > 1)
                 {
-                    if (command.ToString() == "restart")
+                    if (userInput == "restart")
                     {
                         playing = false;
                     }
-                    else if (command.ToString() == "top")
+                    else if (userInput == "top")
                     {
                         this.renderer.RenderScoreboard(Scoreboard.Instance);
                         this.renderer.RenderMessage("\n");
                         this.renderer.RenderBoard(Board.Instance);
                     }
-                    else if (command.ToString() == "exit")
+                    else if (userInput == "exit")
                     {
                         this.renderer.RenderMessage(Messages.ExitMessage);
                         Environment.Exit(0);
@@ -90,23 +86,31 @@
                         this.renderer.RenderMessage("Invalid command!");
                     }
                 }
-                else
+                else 
                 {
+                    try
+                    {
+                        command.ProcessCommand(userInput);
+                    }
+                    catch (ArgumentException)
+                    {
+                        this.renderer.RenderMessage("Invalid command!");
+                        this.renderer.RenderBoard(Board.Instance);
+                        continue;
+                    }
+                    
                     this.renderer.RenderBoard(Board.Instance);
                     if (playerX == 0 || playerX == GlobalConstants.LabyrinthSizeRow - 1 ||
                         playerY == 0 || playerY == GlobalConstants.LabyrinthSizeCol - 1)
                     {
                         playing = false;
+                        gameend = true;
                     }
                 }
             }
 
-            //this.renderer.RenderBoard(Board.Instance);
-            //TypeCommand(Board.Instance, commandListener, GlobalConstants.PlayerStartPositionX, GlobalConstants.PlayerStartPositionY);
-
-
             // used for adding score only when game is finished naturally and not by the restart command.
-            while (flag)
+            while (gameend)
             {
                 this.renderer.RenderMessage(Messages.ScoreboardEnterNicknameMessage);
                 string name = Console.ReadLine();
@@ -114,7 +118,8 @@
                                 .SetName(name)
                                 .SetScore(currentScore);
                 Scoreboard.Instance.AddScore(player);
-                //this.renderer.RenderMessage(string.Format(Messages.ShowPlayerScoreMessage,player.GetScore()));
+                this.renderer.RenderMessage(string.Format(Messages.ShowPlayerScoreMessage, player.GetScore()));
+                this.renderer.RenderScoreboard(Scoreboard.Instance);
                 break;
             }
         }

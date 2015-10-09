@@ -27,15 +27,6 @@ namespace Labyrinth.Logic.Commands
             this.currentCommand = command;
             switch (command)
             {
-                case "top":
-                    this.Top();
-                    break;
-                case "exit":
-                    this.Exit();
-                    break;
-                case "restart":
-                    this.Restart();
-                    break;
                 case "b":
                     this.Undo(this.moveLogic);
                     break;
@@ -56,22 +47,7 @@ namespace Labyrinth.Logic.Commands
 
         public string Invalid()
         {
-            return "Invalid command";
-        }
-
-        public string Restart()
-        {
-            return this.currentCommand;
-        }
-
-        public string Exit()
-        {
-            return this.currentCommand;
-        }
-
-        public string Top()
-        {
-            return this.currentCommand;
+            throw new ArgumentException("Invalid command");
         }
 
         public void Redo(MoveLogic moveLogic)
