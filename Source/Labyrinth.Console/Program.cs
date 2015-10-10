@@ -1,8 +1,7 @@
 ﻿namespace Labyrinth.Console
 {
     using Labyrinth.Logic;
-    using Logic.Observer;
-    using Labyrinth.Logic.Rules;
+    using Labyrinth.Logic.BoardSetupRules;
 
     public class Program
     {

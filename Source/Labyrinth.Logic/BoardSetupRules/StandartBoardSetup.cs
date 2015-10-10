@@ -1,4 +1,4 @@
-﻿namespace Labyrinth.Logic.Rules
+﻿namespace Labyrinth.Logic.BoardSetupRules
 {
     using System;
     using Labyrinth.Logic.Contracts;

@@ -2,7 +2,7 @@
 {
     using System;
     using Labyrinth.Logic.Contracts;
-    using Rules;
+    using BoardSetupRules;
     using Commands;
     using Interfaces;
     using Common;
@@ -11,8 +11,7 @@
     {
         private readonly IRenderer renderer;
         private readonly IInputHandler inputHandler;
-        private IBoardSetup gameRules;
-        private MoveLogic moveLogic;
+        private IBoardSetup boardSetupRules;
 
         public Engine(IRenderer renderer, IInputHandler inputHandler)
         {
@@ -32,8 +31,7 @@
             switch (userGameType)
             {
                 case "standart":
-                    this.gameRules = new StandartBoardSetup();
-                    this.moveLogic = new StandartMoveLogic();
+                    this.boardSetupRules = new StandartBoardSetup();
                     break;
                 case "extra":
                     // different gameRules
@@ -43,7 +41,7 @@
                     break;
             }
 
-            var game = new Game(this.renderer, this.inputHandler, this.gameRules, this.moveLogic);
+            var game = new Game(this.renderer, this.inputHandler, this.boardSetupRules);
             game.Start();
         }
     }

@@ -3,7 +3,6 @@
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using Labyrinth.Models.Contracts;
     using Labyrinth.Models.Players;
 
     public class Scoreboard
@@ -42,7 +41,7 @@
                 }
             }
 
-            playersWithScore = playersWithScore.OrderBy(s => s.GetScore()).ToList();
+            playersWithScore = playersWithScore.OrderBy(p => p.GetScore()).ToList();
         }
     }
 }

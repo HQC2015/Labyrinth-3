@@ -1,25 +1,26 @@
-﻿using Labyrinth.Common;
-using Labyrinth.Logic.Contracts;
-using Labyrinth.Logic.Interfaces;
-using Labyrinth.Models;
-using System;
-using System.Collections.Generic;
-
-namespace Labyrinth.Logic.Commands
+﻿namespace Labyrinth.Logic.Commands
 {
+    using System.Collections.Generic;
+    using Labyrinth.Logic.Interfaces;
+    using Labyrinth.Models.Interfaces;
+
     public class Command
     {
         private readonly List<string> commands;
-        private readonly MoveLogic moveLogic;
-
         private int currentCommandIndex;
         private string currentCommand;
-        private CommandExecutor commandExecutor;
 
-        public Command(MoveLogic moveLogic)
+        private readonly CommandReceiver standartCommandExecutor;
+        private readonly CommandReceiver diagonalCommandExecutor;
+        private readonly IPlayer player;
+
+        public Command(IPlayer player)
         {
             this.commands = new List<string>();
-            this.moveLogic = moveLogic;
+            this.standartCommandExecutor = new StandartCommandExecutor();
+            this.diagonalCommandExecutor = new DiagonalCommandExecutor();
+            this.standartCommandExecutor.SetSuccessor(this.diagonalCommandExecutor);
+            this.player = player;
         }
 
         public void ProcessCommand(string command)
@@ -37,16 +38,17 @@ namespace Labyrinth.Logic.Commands
                     this.Restart();
                     break;
                 case "b":
-                    this.Undo(this.moveLogic);
+                    this.Undo();
                     break;
                 case "f":
-                    this.Redo(this.moveLogic);
+                    this.Redo();
                     break;
                 case "d":
                 case "u":
                 case "l":
                 case "r":
-                    this.Compute(moveLogic);
+                    // ADD MORE CASES AND Chain Of Responsibility Pattern will take care going in DiagonalCommandExecutor
+                    this.Compute();
                     break;
                 default:
                     this.Invalid();
@@ -74,33 +76,29 @@ namespace Labyrinth.Logic.Commands
             return this.currentCommand;
         }
 
-        public void Redo(MoveLogic moveLogic)
+        public void Redo()
         {
-            if (this.currentCommandIndex < this.commands.Count - 1)
+            if (this.currentCommandIndex < this.commands.Count)
             {
-                var command = this.commands[this.currentCommandIndex++];
-                this.commandExecutor = new CommandExecutor(command, moveLogic);
-                this.commandExecutor.Execute();
+                var command = this.commands[this.currentCommandIndex];
+                this.standartCommandExecutor.ProcessCommand(command, this.player);
                 this.currentCommandIndex++;
             }
         }
 
-        public void Undo(MoveLogic moveLogic)
+        public void Undo()
         {
             if (this.currentCommandIndex > 0)
             {
-                var command = this.commands[--this.currentCommandIndex];
-                this.commandExecutor = new CommandExecutor(command, moveLogic);
-                this.commandExecutor.UnExecute();
                 this.currentCommandIndex--;
+                var command = this.commands[this.currentCommandIndex];
+                this.standartCommandExecutor.UnProcessCommand(command, this.player);
             }
         }
 
-        public void Compute(MoveLogic moveLogic)
+        public void Compute()
         {
-            this.commandExecutor = new CommandExecutor(this.currentCommand, moveLogic);
-            this.commandExecutor.Execute();
-
+            this.standartCommandExecutor.ProcessCommand(this.currentCommand, this.player);
             this.commands.Add(this.currentCommand);
             this.currentCommandIndex++;
         }

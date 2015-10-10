@@ -22,9 +22,9 @@
             }
         }
 
-        public bool AreSymbolsEqual(int x, int y, ISymbol symbolToCheckSymbol)
+        public bool AreSymbolsEqual(int x, int y, ISymbol symbolToCheck)
         {
-            return this.Field[x, y].GetValue() == symbolToCheckSymbol.GetValue();
+            return this.Field[x, y].GetValue() == symbolToCheck.GetValue();
         }
 
         public void ReplaceSymbol(int x, int y, ISymbol newSymbol)

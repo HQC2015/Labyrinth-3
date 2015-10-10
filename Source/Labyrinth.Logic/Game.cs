@@ -1,54 +1,45 @@
 ﻿namespace Labyrinth.Logic
 {
     using System;
-    using System.Collections.Generic;
     using Labyrinth.Logic.Contracts;
+    using Labyrinth.Logic.Commands;
     using Labyrinth.Models;
     using Labyrinth.Models.Players;
     using Labyrinth.Models.Symbols;
     using Labyrinth.Common;
     using Labyrinth.Common.Enum;
-    using Labyrinth.Logic.Commands;
-    using Labyrinth.Logic.Observer;
-    using Interfaces;
 
-    public class Game : IObservered
+    public class Game
     {
         private readonly IRenderer renderer;
         private readonly IInputHandler inputHandler;
-        private readonly IBoardSetup gameRules;
-
+        private readonly IBoardSetup boardSetupRules;
+        
+        private readonly Command command;
+        private readonly Player player;
         // .............................................................
 
         private static bool mazeHasSolution; // shows if the random generated labyrinth has an exit route.
         private static bool commandListener; // waiting for input.
 
         private static bool playing; // game in progress.
-        private static readonly bool flag; // used to prevent adding scores when restarting the game.
+        private static readonly bool flag; // used to prevent adding scores when restarting the game
 
-        private int currentScore;
-        private int playerX;
-        private int playerY;
-        private readonly MoveLogic moveLogic;
-        private readonly Command command;
-
-        public Game(IRenderer renderer, IInputHandler inputHandler, IBoardSetup gameRules, MoveLogic moveLogic)
+        public Game(IRenderer renderer, IInputHandler inputHandler, IBoardSetup boardSetupRules)
         {
             this.renderer = renderer;
             this.inputHandler = inputHandler;
-            this.gameRules = gameRules;
-            this.moveLogic = moveLogic;
-            this.moveLogic.Observer = new PlayerObserver();
-            this.command = new Command(this.moveLogic);
+            this.boardSetupRules = boardSetupRules;
+            this.player = new Player();
+            this.command = new Command(this.player);
         }
 
         public void Start()
         {
-            this.moveLogic.Observer.Attach(this);
-            this.moveLogic.Observer.Attach(moveLogic);
-            this.moveLogic.Observer.CurrentScore = this.currentScore;
-            this.moveLogic.Observer.PlayerX = GlobalConstants.PlayerStartPositionX;
-            this.moveLogic.Observer.PlayerY = GlobalConstants.PlayerStartPositionY;
+            this.player
+                .SetScore(0)
+                .SetX(GlobalConstants.PlayerStartPositionX)
+                .SetY(GlobalConstants.PlayerStartPositionY);
 
             commandListener = playing = true;
 
@@ -57,7 +48,7 @@
             
             while (mazeHasSolution == false)
             {
-                this.gameRules.SetGame(Board.Instance);
+                this.boardSetupRules.SetGame(Board.Instance);
                 SolutionChecker(Board.Instance, GlobalConstants.PlayerStartPositionX, GlobalConstants.PlayerStartPositionY);
             }
 
@@ -87,33 +78,26 @@
                     }
                     else
                     {
-                        this.renderer.RenderMessage("Invalid command!");
+                        this.renderer.RenderMessage(Messages.InvalidMoveMessage);
                     }
                 }
                 else
                 {
                     this.renderer.RenderBoard(Board.Instance);
-                    if (playerX == 0 || playerX == GlobalConstants.LabyrinthSizeRow - 1 ||
-                        playerY == 0 || playerY == GlobalConstants.LabyrinthSizeCol - 1)
+                    if (this.player.GetX() == 0 || this.player.GetX() == GlobalConstants.LabyrinthSizeRow - 1 ||
+                        this.player.GetY() == 0 || this.player.GetY() == GlobalConstants.LabyrinthSizeCol - 1)
                     {
                         playing = false;
                     }
                 }
             }
-
-            //this.renderer.RenderBoard(Board.Instance);
-            //TypeCommand(Board.Instance, commandListener, GlobalConstants.PlayerStartPositionX, GlobalConstants.PlayerStartPositionY);
-
-
             // used for adding score only when game is finished naturally and not by the restart command.
             while (flag)
             {
                 this.renderer.RenderMessage(Messages.ScoreboardEnterNicknameMessage);
                 string name = Console.ReadLine();
-                Player player = new Player()
-                                .SetName(name)
-                                .SetScore(currentScore);
-                Scoreboard.Instance.AddScore(player);
+                this.player.SetName(name);
+                Scoreboard.Instance.AddScore(this.player);
                 //this.renderer.RenderMessage(string.Format(Messages.ShowPlayerScoreMessage,player.GetScore()));
                 break;
             }
@@ -178,13 +162,6 @@
                     checking = false;
                 }
             }
-        }
-
-        public void Update(int currentScore, int playerX, int playerY)
-        {
-            this.currentScore = currentScore;
-            this.playerX = playerX;
-            this.playerY = playerY;
         }
     }
 }
