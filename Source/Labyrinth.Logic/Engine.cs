@@ -1,10 +1,7 @@
 ﻿namespace Labyrinth.Logic
 {
-    using System;
     using Labyrinth.Logic.Contracts;
     using BoardSetupRules;
-    using Commands;
-    using Interfaces;
     using Common;
 
     public class Engine : IEngine
@@ -25,6 +22,7 @@
             string userGameType;
             do
             {
+                // validate usergametype and if not valid print a message
                 userGameType = this.inputHandler.GetInput();
             }
             while (userGameType != "standart" && userGameType != "unique");
@@ -34,8 +32,7 @@
                     this.boardSetupRules = new StandartBoardSetup();
                     break;
                 case "extra":
-                    // different gameRules
-                    // different moveLogic
+                    // different boardSetupRules
                     break;
                 default:
                     break;

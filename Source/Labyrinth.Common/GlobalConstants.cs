@@ -10,6 +10,6 @@
         public const char EmptySpaceSymbol = '-';
         public const char FilledSpaceSymbol = 'x';
         public const char CheckSymbol = '0';
-        public string[] legalCommands = new string[9] { "l", "r", "d", "u", "b", "f", "top", "restart", "exit" };
+        ////public string[] LegalCommands = new string[9] { "l", "r", "d", "u", "b", "f", "top", "restart", "exit" };
     }
 }

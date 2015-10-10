@@ -1,4 +1,4 @@
-High-Quality Programming Code – Team 'Labyrinth-3'
+3High-Quality Programming Code – Team 'Labyrinth-3'
 =============================================
 
 Team Members
@@ -174,50 +174,56 @@ Refactoring Documentation for Project “Labyrinth-3”
         * ExitMessage = "GoodBye!"
 4.  Changed DisplayLabyrinth() logic
 	
-	Before:
-	
-		private static void DisplayLabyrinth(string[,] labyrinth)
-        {
-            for (int i = 0; i < 7; i++)
-            {
-                string s1 = labyrinth[i, 0];
-                string s2 = labyrinth[i, 1];
-                string s3 = labyrinth[i, 2];
-                string s4 = labyrinth[i, 3];
-                string s5 = labyrinth[i, 4];
-                string s6 = labyrinth[i, 5];
-                string s7 = labyrinth[i, 6];
-
-                Console.WriteLine("{0} {1} {2} {3} {4} {5} {6} ", s1, s2, s3, s4, s5, s6, s7);
-                Console.WriteLine();
-             }
-
-            Console.WriteLine();
-         }
-		
-	After:
-
-        for (int i = 0; i < LabyrinthSize; i++)
-        {
-            for (int j = 0; j < LabyrinthSize; j++)
-            {
-                string currentCell = labyrinth[i, j];
-                Console.Write(currentCell + ' ');
-            }
-
-            Console.WriteLine();
-        }
 5.  Add Creational patterns
 
-	- Singleton - added new class `Board.cs`
-		* add method Check(int row, int col, string tobeCheckedFor
-		* add method Replace(int row, int col, string tobeCheckedFor
-		* add method Display()
-		* add method FillBoard()
+	- Singleton 
+		-  added new class `Board.cs`
+			* add method Check(int row, int col, string tobeCheckedFor
+			* add method Replace(int row, int col, string tobeCheckedFor
+
+	- Lazy Inicialization
+
+	- Prototype
+
+6. Add Behaivor patterns
+	
+	- Command
 		
-	5.2
+		- added new class Command.cs 
+			- private List<string> commands - field for saving coomands 
+			- process Command () - process command to CommandExecutor or throw exception if it is invalid
+			- Redo (), Undo () - logic for Undo command and pass right command to CommandExecutor
+			- Compute () - process the command to CommandExecutor
 
-	5.3
+		- added new class CommandExecutor.cs
+			- Execute(), UnExecute() - Process the right command to MoveLogic 
+        	- Undo() - replace the command with it oposite command for back move
+		- added new interfase ICommndExecutor - for more abstraction
 
-6. 
+		- added new class MoveLogic.cs
+			- class where we put all move logic and it is inherit IMoveLogic so we can implement new kind of MoveLogic in any time
+			
+	- Observer
+
+		- added new class PlayerObserver.cs
+			- class for observing player coordinates, used for removing dependency between MoveLogic and Renderer.
+			- List<IObservered> listeners - save all objects who need player coordinates.
+			- Attach(IObservered listener), Dettach(IObservered listener) - methods for adding and removing listeners 
+			- Notify() - method who inform listeners for changing any player coordinates or current score, work in all properties setters
+			- <set
+                this.playerY = value;
+                this.Notify();>
+
+		- added new interface IObservered - strange name because of conflict with the c# IObservable
+			- Update() - set new coordinates and current score in listeners 
+	- Memento
+		- added class Save.cs
+
+7. Structural Patterns 
+8. Unit test
+	
+
+
+
+
 

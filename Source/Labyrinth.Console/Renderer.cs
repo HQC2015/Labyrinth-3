@@ -2,11 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
-    using Labyrinth.Logic.Contracts;
-    using Labyrinth.Models;
-    using Labyrinth.Models.Contracts;
-    using Labyrinth.Models.Players;
-    using Labyrinth.Common;
+    using Common;
+    using Logic.Contracts;
+    using Models;
+    using Models.Interfaces;
 
     public class Renderer : IRenderer
     {
@@ -35,7 +34,7 @@
 
         public void RenderScoreboard(Scoreboard scoreboard)
         {
-            List<Player> players = scoreboard.GetPlayers;
+            List<IPlayer> players = scoreboard.GetPlayers;
 
             this.RenderMessage();
             if (players.Count == 0)

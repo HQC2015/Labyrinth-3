@@ -8,6 +8,7 @@
     using Labyrinth.Models.Symbols;
     using Labyrinth.Common;
     using Labyrinth.Common.Enum;
+    using Models.Interfaces;
 
     public class Game
     {
@@ -16,14 +17,16 @@
         private readonly IBoardSetup boardSetupRules;
         
         private readonly Command command;
-        private readonly Player player;
+        private readonly IPlayer player;
         // .............................................................
 
-        private static bool mazeHasSolution; // shows if the random generated labyrinth has an exit route.
-        private static bool commandListener; // waiting for input.
+        private bool mazeHasSolution; // shows if the random generated labyrinth has an exit route.
+        private readonly bool commandListener; // waiting for input.
 
-        private static bool playing; // game in progress.
-        private static readonly bool flag; // used to prevent adding scores when restarting the game
+        private bool playing; // game in progress.
+        private readonly bool flag; // used to prevent adding scores when restarting the game
+        
+        private bool gameend;
 
         public Game(IRenderer renderer, IInputHandler inputHandler, IBoardSetup boardSetupRules)
         {
@@ -41,12 +44,10 @@
                 .SetX(GlobalConstants.PlayerStartPositionX)
                 .SetY(GlobalConstants.PlayerStartPositionY);
 
-            commandListener = playing = true;
-
             this.renderer.RenderMessage(Messages.WelcomeMessage);
             this.renderer.RenderMessage(Messages.GameCommandsMessage);
             
-            while (mazeHasSolution == false)
+            while (this.mazeHasSolution == false)
             {
                 this.boardSetupRules.SetGame(Board.Instance);
                 SolutionChecker(Board.Instance, GlobalConstants.PlayerStartPositionX, GlobalConstants.PlayerStartPositionY);
@@ -54,24 +55,24 @@
 
             this.renderer.RenderBoard(Board.Instance);
 
-            while (playing)
+            this.playing = true;
+            while (this.playing)
             {
                 this.renderer.RenderMessage(Messages.EnterMoveMessage);
                 var userInput = this.inputHandler.GetInput();
-                this.command.ProcessCommand(userInput);
-                if (command.GetType() == typeof(string))
+                if (userInput.Length > 1)
                 {
-                    if (command.ToString() == "restart")
+                    if (userInput == "restart")
                     {
-                        playing = false;
+                        this.playing = false;
                     }
-                    else if (command.ToString() == "top")
+                    else if (userInput == "top")
                     {
                         this.renderer.RenderScoreboard(Scoreboard.Instance);
                         this.renderer.RenderMessage("\n");
                         this.renderer.RenderBoard(Board.Instance);
                     }
-                    else if (command.ToString() == "exit")
+                    else if (userInput == "exit")
                     {
                         this.renderer.RenderMessage(Messages.ExitMessage);
                         Environment.Exit(0);
@@ -81,26 +82,39 @@
                         this.renderer.RenderMessage(Messages.InvalidMoveMessage);
                     }
                 }
-                else
+                else 
                 {
-                    this.renderer.RenderBoard(Board.Instance);
+                    try
+                    {
+                        this.command.ProcessCommand(userInput);
+                    }
+                    catch (ArgumentException)
+                    {
+                        this.renderer.RenderMessage("Invalid command!");
+                    }
+                    finally
+                    {
+                        this.renderer.RenderBoard(Board.Instance);
+                    }
+
                     if (this.player.GetX() == 0 || this.player.GetX() == GlobalConstants.LabyrinthSizeRow - 1 ||
                         this.player.GetY() == 0 || this.player.GetY() == GlobalConstants.LabyrinthSizeCol - 1)
                     {
-                        playing = false;
+                        this.playing = false;
+                        //this.gameend = true;
                     }
                 }
             }
             // used for adding score only when game is finished naturally and not by the restart command.
-            while (flag)
-            {
+            //while (this.gameend)
+            //{
                 this.renderer.RenderMessage(Messages.ScoreboardEnterNicknameMessage);
                 string name = Console.ReadLine();
                 this.player.SetName(name);
                 Scoreboard.Instance.AddScore(this.player);
-                //this.renderer.RenderMessage(string.Format(Messages.ShowPlayerScoreMessage,player.GetScore()));
-                break;
-            }
+                this.renderer.RenderMessage(string.Format(Messages.ShowPlayerScoreMessage, player.GetScore()));
+                this.renderer.RenderScoreboard(Scoreboard.Instance);
+            //}
         }
 
         private void SolutionChecker(Board board, int playerX, int playerY)
@@ -113,7 +127,7 @@
                 board.AreSymbolsEqual(playerX, playerY - 1, SymbolFactory.GetSymbol(SymbolsEnum.FilledSpace)))
             { // player is trapped
                 checking = false;
-                mazeHasSolution = false;
+                this.mazeHasSolution = false;
             }
 
             while (checking)
@@ -158,7 +172,7 @@
                         }
                     }
 
-                    mazeHasSolution = true;
+                    this.mazeHasSolution = true;
                     checking = false;
                 }
             }

@@ -1,5 +1,6 @@
 ﻿namespace Labyrinth.Logic.Commands
 {
+    using System;
     using System.Collections.Generic;
     using Labyrinth.Logic.Interfaces;
     using Labyrinth.Models.Interfaces;
@@ -28,15 +29,6 @@
             this.currentCommand = command;
             switch (command)
             {
-                case "top":
-                    this.Top();
-                    break;
-                case "exit":
-                    this.Exit();
-                    break;
-                case "restart":
-                    this.Restart();
-                    break;
                 case "b":
                     this.Undo();
                     break;
@@ -51,11 +43,10 @@
                     this.Compute();
                     break;
                 default:
-                    this.Invalid();
-                    break;
+                    throw new ArgumentException("Invalid command");
             }
         }
-
+        
         public string Invalid()
         {
             return "Invalid command";

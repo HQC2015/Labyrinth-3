@@ -1,47 +1,47 @@
 ﻿namespace Labyrinth.Models
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
     using Labyrinth.Models.Players;
+    using Interfaces;
 
     public class Scoreboard
     {
-        private static readonly Lazy<Scoreboard> instance = new Lazy<Scoreboard>(() => new Scoreboard());
-        private List<Player> playersWithScore = new List<Player>();
+        private static readonly Lazy<Scoreboard> instanceOfScoreboard = new Lazy<Scoreboard>(() => new Scoreboard());
+        private List<IPlayer> playersWithScore = new List<IPlayer>();
 
         public static Scoreboard Instance
         {
             get
             {
-                return instance.Value;
+                return instanceOfScoreboard.Value;
             }
         }
 
-        public List<Player> GetPlayers
+        public List<IPlayer> GetPlayers
         {
             get
             {
-                return playersWithScore.ToList<Player>();
+                return this.playersWithScore.ToList<IPlayer>();
             }
         }
 
-        public void AddScore(Player playerWithScore)
+        public void AddScore(IPlayer playerWithScore)
         {
-            if (playersWithScore.Count < 5)
+            if (this.playersWithScore.Count < 5)
             {
-                playersWithScore.Add(playerWithScore);
+                this.playersWithScore.Add(playerWithScore);
             }
-            else if (playersWithScore.Count >= 5)
+            else if (this.playersWithScore.Count >= 5)
             {
-                if (playersWithScore[4].GetScore() < playerWithScore.GetScore())
+                if (this.playersWithScore[4].GetScore() < playerWithScore.GetScore())
                 {
-                    playersWithScore.Remove(playersWithScore[4]);
-                    playersWithScore.Add(playerWithScore);
+                    this.playersWithScore.Remove(this.playersWithScore[4]);
+                    this.playersWithScore.Add(playerWithScore);
                 }
             }
-
-            playersWithScore = playersWithScore.OrderBy(p => p.GetScore()).ToList();
+            this.playersWithScore = this.playersWithScore.OrderBy(p => p.GetScore()).ToList();
         }
     }
 }

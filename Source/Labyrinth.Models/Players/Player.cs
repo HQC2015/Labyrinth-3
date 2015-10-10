@@ -1,6 +1,5 @@
 ﻿namespace Labyrinth.Models.Players
 {
-    using System;
     using Labyrinth.Logic.Interfaces;
     using Labyrinth.Models.Interfaces;
 
