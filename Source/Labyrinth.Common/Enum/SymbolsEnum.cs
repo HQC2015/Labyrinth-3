@@ -5,6 +5,7 @@
         Player,
         EmptySpace,
         FilledSpace,
-        Check
+        Check,
+        Test
     }
 }

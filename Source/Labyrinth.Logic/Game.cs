@@ -101,14 +101,14 @@
                         this.player.GetY() == 0 || this.player.GetY() == GlobalConstants.LabyrinthSizeCol - 1)
                     {
                         this.playing = false;
-                        //this.gameend = true;
+                        ////this.gameend = true;
                     }
                 }
             }
-            // used for adding score only when game is finished naturally and not by the restart command.
-            //while (this.gameend)
-            //{
-                this.renderer.RenderMessage(Messages.ScoreboardEnterNicknameMessage);
+            //// used for adding score only when game is finished naturally and not by the restart command.
+            ////while (this.gameend)
+            ////{
+            this.renderer.RenderMessage(Messages.ScoreboardEnterNicknameMessage);
                 string name = Console.ReadLine();
                 this.player.SetName(name);
                 Scoreboard.Instance.AddScore(this.player);
