@@ -1,12 +1,12 @@
-﻿namespace Labyrinth.Logic.Interfaces
+﻿namespace Labyrinth.Logic.Commands
 {
     using Labyrinth.Models.Interfaces;
 
-    public abstract class CommandReceiver
+    public abstract class CommandExecutor
     {
-        protected CommandReceiver Successor { get; set; }
+        protected CommandExecutor Successor { get; set; }
 
-        public void SetSuccessor(CommandReceiver successor)
+        public void SetSuccessor(CommandExecutor successor)
         {
             this.Successor = successor;
         }

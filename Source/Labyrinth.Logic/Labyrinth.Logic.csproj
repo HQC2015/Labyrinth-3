@@ -57,7 +57,7 @@
     <Compile Include="Contracts\IInputHandler.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="Commands\CommandReceiver.cs" />
+    <Compile Include="Commands\CommandExecutor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BoardSetupRules\StandartBoardSetup.cs" />
   </ItemGroup>

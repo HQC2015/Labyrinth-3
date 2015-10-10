@@ -1,4 +1,4 @@
-﻿namespace Labyrinth.Logic.Interfaces
+﻿namespace Labyrinth.Logic.Commands
 {
     using Labyrinth.Models.Interfaces;
 

@@ -1,6 +1,6 @@
 ﻿using Labyrinth.Models.Interfaces;
 
-namespace Labyrinth.Logic.Interfaces
+namespace Labyrinth.Logic.Commands
 {
     public interface IVisitor
     {

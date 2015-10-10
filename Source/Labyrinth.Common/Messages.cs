@@ -11,5 +11,7 @@
         public const string ScoreboardEmptyMessage = "The Scoreboard is empty!";
         public const string ExitMessage = "GoodBye!";
         public const string ShowPlayerScoreMessage = "Congratz you finished with {0} moves.";
+        public const string StartANewGameMessage = "Would you like to start a new game?";
+        public const string ThanksForPlayingMessage = "Thank you for playing!";
     }
 }

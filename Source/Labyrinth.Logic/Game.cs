@@ -2,31 +2,26 @@
 {
     using System;
     using Labyrinth.Logic.Contracts;
-    using Labyrinth.Logic.Commands;
     using Labyrinth.Models;
     using Labyrinth.Models.Players;
     using Labyrinth.Models.Symbols;
     using Labyrinth.Common;
     using Labyrinth.Common.Enum;
     using Models.Interfaces;
+    using Commands;
 
     public class Game
     {
         private readonly IRenderer renderer;
         private readonly IInputHandler inputHandler;
         private readonly IBoardSetup boardSetupRules;
-        
-        private readonly Command command;
-        private readonly IPlayer player;
+
+        private Command command;
+        private IPlayer player;
         // .............................................................
 
         private bool mazeHasSolution; // shows if the random generated labyrinth has an exit route.
-        private readonly bool commandListener; // waiting for input.
-
         private bool playing; // game in progress.
-        private readonly bool flag; // used to prevent adding scores when restarting the game
-        
-        private bool gameend;
 
         public Game(IRenderer renderer, IInputHandler inputHandler, IBoardSetup boardSetupRules)
         {
@@ -46,7 +41,7 @@
 
             this.renderer.RenderMessage(Messages.WelcomeMessage);
             this.renderer.RenderMessage(Messages.GameCommandsMessage);
-            
+
             while (this.mazeHasSolution == false)
             {
                 this.boardSetupRules.SetGame(Board.Instance);
@@ -54,12 +49,11 @@
             }
 
             this.renderer.RenderBoard(Board.Instance);
-
             this.playing = true;
             while (this.playing)
             {
                 this.renderer.RenderMessage(Messages.EnterMoveMessage);
-                var userInput = this.inputHandler.GetInput();
+                string userInput = this.inputHandler.GetInput();
                 if (userInput.Length > 1)
                 {
                     if (userInput == "restart")
@@ -82,7 +76,7 @@
                         this.renderer.RenderMessage(Messages.InvalidMoveMessage);
                     }
                 }
-                else 
+                else
                 {
                     try
                     {
@@ -101,20 +95,39 @@
                         this.player.GetY() == 0 || this.player.GetY() == GlobalConstants.LabyrinthSizeCol - 1)
                     {
                         this.playing = false;
-                        //this.gameend = true;
                     }
                 }
             }
-            // used for adding score only when game is finished naturally and not by the restart command.
-            //while (this.gameend)
-            //{
-                this.renderer.RenderMessage(Messages.ScoreboardEnterNicknameMessage);
-                string name = Console.ReadLine();
-                this.player.SetName(name);
-                Scoreboard.Instance.AddScore(this.player);
-                this.renderer.RenderMessage(string.Format(Messages.ShowPlayerScoreMessage, player.GetScore()));
-                this.renderer.RenderScoreboard(Scoreboard.Instance);
-            //}
+
+            this.renderer.RenderMessage(Messages.ScoreboardEnterNicknameMessage);
+            string name = Console.ReadLine();
+            this.player.SetName(name);
+            Scoreboard.Instance.AddScore(this.player);
+            this.renderer.RenderMessage(string.Format(Messages.ShowPlayerScoreMessage, player.GetScore()));
+            this.renderer.RenderScoreboard(Scoreboard.Instance);
+
+            this.renderer.RenderMessage(Messages.StartANewGameMessage);
+            string userInputToPlayAgain = this.inputHandler.GetInput();
+            if (userInputToPlayAgain.ToLower() == "yes")
+            {
+                this.RestartGame();
+            }
+            else
+            {
+                this.renderer.RenderMessage(Messages.ThanksForPlayingMessage);
+            }
+        }
+
+        private void RestartGame()
+        {
+            this.player = new Player();
+            this.player
+                .SetScore(0)
+                .SetX(GlobalConstants.PlayerStartPositionX)
+                .SetY(GlobalConstants.PlayerStartPositionY);
+            this.mazeHasSolution = false;
+            this.command = new Command(this.player);
+            this.Start();
         }
 
         private void SolutionChecker(Board board, int playerX, int playerY)

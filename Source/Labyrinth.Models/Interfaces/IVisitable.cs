@@ -1,6 +1,6 @@
 ﻿namespace Labyrinth.Models.Interfaces
 {
-    using Labyrinth.Logic.Interfaces;
+    using Labyrinth.Logic.Commands;
 
     public interface IVisitable
     {

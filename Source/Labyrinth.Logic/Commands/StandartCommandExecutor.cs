@@ -1,10 +1,9 @@
 ﻿namespace Labyrinth.Logic.Commands
 {
-    using Interfaces;
     using Models.Interfaces;
     using Models.Visitors;
 
-    public class StandartCommandExecutor : CommandReceiver, ICommandExecutor
+    public class StandartCommandExecutor : CommandExecutor, ICommandExecutor
     {
         private readonly IVisitor visitor;
 

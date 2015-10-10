@@ -2,7 +2,7 @@
 
 namespace Labyrinth.Models.Interfaces
 {
-    using Labyrinth.Logic.Interfaces;
+    using Labyrinth.Logic.Commands;
     using Players;
 
     public interface IPlayer : IVisitable

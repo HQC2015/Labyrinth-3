@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using Labyrinth.Logic.Interfaces;
     using Labyrinth.Models.Interfaces;
 
     public class Command
@@ -11,8 +10,8 @@
         private int currentCommandIndex;
         private string currentCommand;
 
-        private readonly CommandReceiver standartCommandExecutor;
-        private readonly CommandReceiver diagonalCommandExecutor;
+        private readonly CommandExecutor standartCommandExecutor;
+        private readonly CommandExecutor diagonalCommandExecutor;
         private readonly IPlayer player;
 
         public Command(IPlayer player)
@@ -45,26 +44,6 @@
                 default:
                     throw new ArgumentException("Invalid command");
             }
-        }
-        
-        public string Invalid()
-        {
-            return "Invalid command";
-        }
-
-        public string Restart()
-        {
-            return this.currentCommand;
-        }
-
-        public string Exit()
-        {
-            return this.currentCommand;
-        }
-
-        public string Top()
-        {
-            return this.currentCommand;
         }
 
         public void Redo()

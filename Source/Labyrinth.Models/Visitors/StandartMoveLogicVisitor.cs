@@ -2,7 +2,7 @@
 {
     using Labyrinth.Models;
     using Labyrinth.Models.Symbols;
-    using Labyrinth.Logic.Interfaces;
+    using Labyrinth.Logic.Commands;
     using Labyrinth.Common.Enum;
     using Models.Interfaces;
 

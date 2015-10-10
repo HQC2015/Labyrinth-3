@@ -1,11 +1,16 @@
 ﻿namespace Labyrinth.Models.Players
 {
-    using Labyrinth.Logic.Interfaces;
+    using Labyrinth.Logic.Commands;
     using Labyrinth.Models.Interfaces;
 
     public class Player : IPlayer
     {
         private readonly PlayerContext context = new PlayerContext();
+
+        public Player()
+        {
+            this.context = new PlayerContext();
+        }
 
         public Player SetName(string name)
         {

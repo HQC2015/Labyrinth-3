@@ -1,10 +1,9 @@
 ﻿namespace Labyrinth.Logic.Commands
 {
     using System;
-    using Labyrinth.Logic.Interfaces;
     using Models.Interfaces;
 
-    public class DiagonalCommandExecutor : CommandReceiver, ICommandExecutor
+    public class DiagonalCommandExecutor : CommandExecutor, ICommandExecutor
     {
         public void Execute(string command, IPlayer player)
         {
