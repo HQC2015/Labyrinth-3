@@ -1,6 +1,5 @@
 ﻿namespace Labyrinth.Logic
 {
-    using System;
     using Commands;
     using Contracts;
     using Interfaces;

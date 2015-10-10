@@ -1,7 +1,7 @@
 ﻿namespace Labyrinth.Console
 {
     using System;
-    using Labyrinth.Logic.Contracts;
+    using Logic.Contracts;
 
     public class InputHandler : IInputHandler
     {

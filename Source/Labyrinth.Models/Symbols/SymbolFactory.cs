@@ -2,8 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using Labyrinth.Common.Enum;
-    using Labyrinth.Models.Contracts;
+    using Common.Enum;
+    using Contracts;
 
     public static class SymbolFactory
     {

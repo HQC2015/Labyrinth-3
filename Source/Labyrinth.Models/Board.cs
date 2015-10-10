@@ -1,7 +1,7 @@
 ﻿namespace Labyrinth.Models
 {
     using System;
-    using Labyrinth.Models.Contracts;
+    using Contracts;
 
     public class Board
     {

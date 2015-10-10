@@ -1,7 +1,5 @@
 ﻿namespace Labyrinth.Models.Players
 {
-    using Labyrinth.Models.Contracts;
-
     public class Player
     {
         private readonly PlayerContext context = new PlayerContext();

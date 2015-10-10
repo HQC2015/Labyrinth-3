@@ -2,10 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using Labyrinth.Common;
-    using Labyrinth.Logic.Contracts;
-    using Labyrinth.Logic.Interfaces;
-    using Labyrinth.Models;
+    using Interfaces;
 
     public class Command
     {

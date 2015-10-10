@@ -1,6 +1,6 @@
 ﻿namespace Labyrinth.Logic.Contracts
 {
-    using Labyrinth.Models;
+    using Models;
 
     public interface IBoardSetup
     {
