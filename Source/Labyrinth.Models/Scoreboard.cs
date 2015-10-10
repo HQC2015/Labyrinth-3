@@ -1,21 +1,21 @@
 ﻿namespace Labyrinth.Models
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
     using Labyrinth.Models.Contracts;
     using Labyrinth.Models.Players;
 
     public class Scoreboard
     {
-        private static readonly Lazy<Scoreboard> instance = new Lazy<Scoreboard>(() => new Scoreboard());
+        private static readonly Lazy<Scoreboard> InstanceOfScoreboard = new Lazy<Scoreboard>(() => new Scoreboard());
         private List<Player> playersWithScore = new List<Player>();
 
         public static Scoreboard Instance
         {
             get
             {
-                return instance.Value;
+                return InstanceOfScoreboard.Value;
             }
         }
 
@@ -23,26 +23,26 @@
         {
             get
             {
-                return playersWithScore.ToList<Player>();
+                return this.playersWithScore.ToList<Player>();
             }
         }
 
         public void AddScore(Player playerWithScore)
         {
-            if (playersWithScore.Count < 5)
+            if (this.playersWithScore.Count < 5)
             {
-                playersWithScore.Add(playerWithScore);
+                this.playersWithScore.Add(playerWithScore);
             }
-            else if (playersWithScore.Count >= 5)
+            else if (this.playersWithScore.Count >= 5)
             {
-                if (playersWithScore[4].GetScore() < playerWithScore.GetScore())
+                if (this.playersWithScore[4].GetScore() < playerWithScore.GetScore())
                 {
-                    playersWithScore.Remove(playersWithScore[4]);
-                    playersWithScore.Add(playerWithScore);
+                    this.playersWithScore.Remove(this.playersWithScore[4]);
+                    this.playersWithScore.Add(playerWithScore);
                 }
             }
 
-            playersWithScore = playersWithScore.OrderBy(s => s.GetScore()).ToList();
+            this.playersWithScore = this.playersWithScore.OrderBy(s => s.GetScore()).ToList();
         }
     }
 }

@@ -2,11 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
-    using Labyrinth.Logic.Contracts;
-    using Labyrinth.Models;
-    using Labyrinth.Models.Contracts;
-    using Labyrinth.Models.Players;
-    using Labyrinth.Common;
+    using Common;
+    using Logic.Contracts;
+    using Models;
+    using Models.Players;
 
     public class Renderer : IRenderer
     {

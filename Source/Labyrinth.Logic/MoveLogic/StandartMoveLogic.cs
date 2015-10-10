@@ -1,9 +1,9 @@
 ﻿namespace Labyrinth.Logic.Commands
 {
-    using Labyrinth.Models;
-    using Labyrinth.Models.Symbols;
-    using Labyrinth.Logic.Interfaces;
-    using Labyrinth.Common.Enum;
+    using Common.Enum;
+    using Interfaces;
+    using Models;
+    using Models.Symbols;
 
     public class StandartMoveLogic : MoveLogic
     {
@@ -23,6 +23,7 @@
                         this.Observer.PlayerX = this.playerX + 1;
                         this.Observer.CurrentScore = this.Observer.CurrentScore + 1;
                     }
+
                     break;
                 case "u":
                     if (Board.Instance.AreSymbolsEqual(this.playerX - 1, this.Observer.PlayerY, SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace)))
@@ -32,6 +33,7 @@
                         this.Observer.PlayerX = this.playerX - 1;
                         Observer.CurrentScore = this.Observer.CurrentScore + 1;
                     }
+
                     break;
                 case "r":
                     if (Board.Instance.AreSymbolsEqual(this.playerX, this.Observer.PlayerY + 1, SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace)))
@@ -41,6 +43,7 @@
                         Observer.PlayerY = this.Observer.PlayerY + 1;
                         Observer.CurrentScore = this.Observer.CurrentScore + 1;
                     }
+
                     break;
                 case "l":
                     if (Board.Instance.AreSymbolsEqual(this.playerX, this.Observer.PlayerY - 1, SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace)))
@@ -50,6 +53,7 @@
                         Observer.PlayerY = this.Observer.PlayerY - 1;
                         Observer.CurrentScore = this.Observer.CurrentScore + 1;
                     }
+
                     break;
             }
         }

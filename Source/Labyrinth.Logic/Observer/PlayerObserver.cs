@@ -1,8 +1,8 @@
 ﻿namespace Labyrinth.Logic.Observer
 {
-    using Interfaces;
     using System.Collections.Generic;
-
+    using Interfaces;
+    
     public class PlayerObserver
     {
         private readonly List<IObservered> listeners = new List<IObservered>();
@@ -27,6 +27,7 @@
             {
                 return this.currentScore;
             }
+
             set
             {
                 this.currentScore = value;
@@ -40,6 +41,7 @@
             {
                 return this.playerX;
             }
+
             set
             {
                 this.playerX = value;
@@ -53,6 +55,7 @@
             {
                 return this.playerY;
             }
+
             set
             {
                 this.playerY = value;
@@ -72,7 +75,7 @@
 
         private void Notify()
         {
-            foreach(var observed in listeners)
+            foreach (var observed in this.listeners)
             {
                 observed.Update(this.CurrentScore, this.playerX, this.playerY);
             }

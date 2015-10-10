@@ -1,13 +1,10 @@
 ﻿namespace Labyrinth.Logic.Rules
 {
     using System;
-    using Labyrinth.Logic.Contracts;
-    using Labyrinth.Models;
-    using Labyrinth.Models.Contracts;
-    using Labyrinth.Models.Symbols;
-    using Labyrinth.Common.Enum;
-    using Models.Players;
-    using Interfaces;
+    using Common.Enum;
+    using Contracts;
+    using Models;
+    using Models.Symbols;
 
     public class StandartBoardSetup : IBoardSetup
     {
@@ -16,7 +13,7 @@
 
         public void SetGame(Board board)
         {
-            FillBoard(board);
+            this.FillBoard(board);
         }
 
         private void FillBoard(Board board)

@@ -1,12 +1,12 @@
-﻿using Labyrinth.Common;
-using Labyrinth.Logic.Contracts;
-using Labyrinth.Logic.Interfaces;
-using Labyrinth.Models;
-using System;
-using System.Collections.Generic;
-
-namespace Labyrinth.Logic.Commands
+﻿namespace Labyrinth.Logic.Commands
 {
+    using System;
+    using System.Collections.Generic;
+    using Labyrinth.Common;
+    using Labyrinth.Logic.Contracts;
+    using Labyrinth.Logic.Interfaces;
+    using Labyrinth.Models;
+
     public class Command
     {
         private readonly List<string> commands;
@@ -37,7 +37,7 @@ namespace Labyrinth.Logic.Commands
                 case "u":
                 case "l":
                 case "r":
-                    this.Compute(moveLogic);
+                    this.Compute(this.moveLogic);
                     break;
                 default:
                     throw new ArgumentException("Invalid command");

@@ -1,8 +1,7 @@
-﻿using Labyrinth.Logic.Observer;
-using System;
-
-namespace Labyrinth.Logic.Interfaces
+﻿namespace Labyrinth.Logic.Interfaces
 {
+    using Observer;
+
     public abstract class MoveLogic : IObservered
     {
         public PlayerObserver Observer;

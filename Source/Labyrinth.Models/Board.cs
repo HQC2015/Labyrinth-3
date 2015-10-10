@@ -5,22 +5,22 @@
 
     public class Board
     {
-        private static readonly Lazy<Board> instance = new Lazy<Board>(() => new Board(GlobalConstants.LabyrinthSizeRow, GlobalConstants.LabyrinthSizeCol));
+        private static readonly Lazy<Board> InstanceOfBoard = new Lazy<Board>(() => new Board(GlobalConstants.LabyrinthSizeRow, GlobalConstants.LabyrinthSizeCol));
 
         private Board(int labyrinthSizeRow, int labyrinthSizeCol)
         {
-            Field = new ISymbol[labyrinthSizeRow, labyrinthSizeCol];
+            this.Field = new ISymbol[labyrinthSizeRow, labyrinthSizeCol];
         }
-
-        public ISymbol[,] Field { get; private set; }
 
         public static Board Instance
         {
             get
             {
-                return instance.Value;
+                return InstanceOfBoard.Value;
             }
         }
+
+        public ISymbol[,] Field { get; private set; }
 
         public bool AreSymbolsEqual(int x, int y, ISymbol symbolToCheckSymbol)
         {

@@ -1,16 +1,15 @@
 ﻿namespace Labyrinth.Logic
 {
     using System;
-    using System.Collections.Generic;
-    using Labyrinth.Logic.Contracts;
-    using Labyrinth.Models;
-    using Labyrinth.Models.Players;
-    using Labyrinth.Models.Symbols;
-    using Labyrinth.Common;
-    using Labyrinth.Common.Enum;
-    using Labyrinth.Logic.Commands;
-    using Labyrinth.Logic.Observer;
+    using Commands;
+    using Common;
+    using Common.Enum;
+    using Contracts;
     using Interfaces;
+    using Models;
+    using Models.Players;
+    using Models.Symbols;
+    using Observer;
 
     public class Game : IObservered
     {
@@ -18,7 +17,8 @@
         private readonly IInputHandler inputHandler;
         private readonly IBoardSetup gameRules;
 
-        // .............................................................
+        private readonly MoveLogic moveLogic;
+        private readonly Command command;
 
         private bool mazeHasSolution; // shows if the random generated labyrinth has an exit route.
         private bool playing; // game in progress.
@@ -27,8 +27,6 @@
         private int currentScore;
         private int playerX;
         private int playerY;
-        private readonly MoveLogic moveLogic;
-        private readonly Command command;
 
         public Game(IRenderer renderer, IInputHandler inputHandler, IBoardSetup gameRules, MoveLogic moveLogic)
         {
@@ -51,16 +49,16 @@
             this.renderer.RenderMessage(Messages.WelcomeMessage);
             this.renderer.RenderMessage(Messages.GameCommandsMessage);
             
-            while (mazeHasSolution == false)
+            while (this.mazeHasSolution == false)
             {
                 this.gameRules.SetGame(Board.Instance);
-                SolutionChecker(Board.Instance, GlobalConstants.PlayerStartPositionX, GlobalConstants.PlayerStartPositionY);
+                this.SolutionChecker(Board.Instance, GlobalConstants.PlayerStartPositionX, GlobalConstants.PlayerStartPositionY);
             }
 
             this.renderer.RenderBoard(Board.Instance);
 
-            playing = true;
-            while (playing)
+            this.playing = true;
+            while (this.playing)
             {
                 this.renderer.RenderMessage(Messages.EnterMoveMessage);
                 var userInput = this.inputHandler.GetInput();
@@ -68,7 +66,7 @@
                 {
                     if (userInput == "restart")
                     {
-                        playing = false;
+                        this.playing = false;
                     }
                     else if (userInput == "top")
                     {
@@ -90,7 +88,7 @@
                 {
                     try
                     {
-                        command.ProcessCommand(userInput);
+                        this.command.ProcessCommand(userInput);
                     }
                     catch (ArgumentException)
                     {
@@ -100,28 +98,35 @@
                     }
                     
                     this.renderer.RenderBoard(Board.Instance);
-                    if (playerX == 0 || playerX == GlobalConstants.LabyrinthSizeRow - 1 ||
-                        playerY == 0 || playerY == GlobalConstants.LabyrinthSizeCol - 1)
+                    if (this.playerX == 0 || this.playerX == GlobalConstants.LabyrinthSizeRow - 1 ||
+                        this.playerY == 0 || this.playerY == GlobalConstants.LabyrinthSizeCol - 1)
                     {
-                        playing = false;
-                        gameend = true;
+                        this.playing = false;
+                        this.gameend = true;
                     }
                 }
             }
 
             // used for adding score only when game is finished naturally and not by the restart command.
-            while (gameend)
+            while (this.gameend)
             {
                 this.renderer.RenderMessage(Messages.ScoreboardEnterNicknameMessage);
                 string name = Console.ReadLine();
                 Player player = new Player()
                                 .SetName(name)
-                                .SetScore(currentScore);
+                                .SetScore(this.currentScore);
                 Scoreboard.Instance.AddScore(player);
                 this.renderer.RenderMessage(string.Format(Messages.ShowPlayerScoreMessage, player.GetScore()));
                 this.renderer.RenderScoreboard(Scoreboard.Instance);
                 break;
             }
+        }
+
+        public void Update(int currentScore, int playerX, int playerY)
+        {
+            this.currentScore = currentScore;
+            this.playerX = playerX;
+            this.playerY = playerY;
         }
 
         private void SolutionChecker(Board board, int playerX, int playerY)
@@ -134,7 +139,7 @@
                 board.AreSymbolsEqual(playerX, playerY - 1, SymbolFactory.GetSymbol(SymbolsEnum.FilledSpace)))
             { // player is trapped
                 checking = false;
-                mazeHasSolution = false;
+                this.mazeHasSolution = false;
             }
 
             while (checking)
@@ -179,17 +184,10 @@
                         }
                     }
 
-                    mazeHasSolution = true;
+                    this.mazeHasSolution = true;
                     checking = false;
                 }
             }
-        }
-
-        public void Update(int currentScore, int playerX, int playerY)
-        {
-            this.currentScore = currentScore;
-            this.playerX = playerX;
-            this.playerY = playerY;
         }
     }
 }

@@ -1,11 +1,10 @@
 ﻿namespace Labyrinth.Logic
 {
     using System;
-    using Labyrinth.Logic.Contracts;
-    using Rules;
     using Commands;
+    using Contracts;
     using Interfaces;
-    using Common;
+    using Rules;
 
     public class Engine : IEngine
     {
@@ -24,28 +23,27 @@
 
         public void Run()
         {
-            //TODO make it  right
-
-            //this.renderer.RenderMessage(Messages.TypeOfGameMessage);
-            //string userGameType;
-            //do
-            //{
-            //    userGameType = this.inputHandler.GetInput();
-            //}
-            //while (userGameType != "standart" && userGameType != "unique");
-            //switch (userGameType)
-            //{
-            //    case "standart":
-            //        this.gameRules = new StandartBoardSetup();
-            //        this.moveLogic = new StandartMoveLogic();
-            //        break;
-            //    case "extra":
-            //        // different gameRules
-            //        // different moveLogic
-            //        break;
-            //    default:
-            //        break;
-            //}
+            ////TODO make it  right
+            ////this.renderer.RenderMessage(Messages.TypeOfGameMessage);
+            ////string userGameType;
+            ////do
+            ////{
+            ////    userGameType = this.inputHandler.GetInput();
+            ////}
+            ////while (userGameType != "standart" && userGameType != "unique");
+            ////switch (userGameType)
+            ////{
+            ////    case "standart":
+            ////        this.gameRules = new StandartBoardSetup();
+            ////        this.moveLogic = new StandartMoveLogic();
+            ////        break;
+            ////    case "extra":
+            ////        // different gameRules
+            ////        // different moveLogic
+            ////        break;
+            ////    default:
+            ////        break;
+            ////}
             while (true)
             {
                 var game = new Game(this.renderer, this.inputHandler, this.gameRules, this.moveLogic);

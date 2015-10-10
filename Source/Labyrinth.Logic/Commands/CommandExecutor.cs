@@ -1,10 +1,6 @@
 ﻿namespace Labyrinth.Logic.Commands
 {
     using System;
-    using Labyrinth.Logic.Contracts;
-    using Labyrinth.Models.Contracts;
-    using Models.Players;
-    using Models;
     using Interfaces;
 
     public class CommandExecutor : ICommandExecutor
@@ -20,12 +16,12 @@
 
         public void Execute()
         {
-            this.moveLogic.MakeMove(command);
+            this.moveLogic.MakeMove(this.command);
         }
 
         public void UnExecute()
         {
-            this.moveLogic.MakeMove(Undo(command));
+            this.moveLogic.MakeMove(this.Undo(this.command));
         }
 
         public string Undo(string command)

@@ -2,20 +2,20 @@
 {
     using System;
     using System.Collections.Generic;
-    using Labyrinth.Models.Contracts;
     using Labyrinth.Common.Enum;
+    using Labyrinth.Models.Contracts;
 
     public static class SymbolFactory
     {
-        private static readonly Dictionary<SymbolsEnum, ISymbol> symbols = new Dictionary<SymbolsEnum, ISymbol>();
+        private static readonly Dictionary<SymbolsEnum, ISymbol> Symbols = new Dictionary<SymbolsEnum, ISymbol>();
 
         public static ISymbol GetSymbol(SymbolsEnum key)
         {
             // Uses "lazy initialization"
             ISymbol symbol = null;
-            if (symbols.ContainsKey(key))
+            if (Symbols.ContainsKey(key))
             {
-                symbol = symbols[key];
+                symbol = Symbols[key];
             }
             else
             {
@@ -37,7 +37,7 @@
                         throw new InvalidOperationException("Wrong key for the SymbolFactory.GetSymbol(SymbolsEnum)");
                 }
 
-                symbols.Add(key, symbol);
+                Symbols.Add(key, symbol);
             }
 
             return symbol;
