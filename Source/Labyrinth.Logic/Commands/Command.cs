@@ -40,36 +40,24 @@ namespace Labyrinth.Logic.Commands
                     this.Compute(moveLogic);
                     break;
                 default:
-                    this.Invalid();
-                    break;
+                    throw new ArgumentException("Invalid command");
             }
-        }
-
-        public string Invalid()
-        {
-            throw new ArgumentException("Invalid command");
         }
 
         public void Redo(MoveLogic moveLogic)
         {
-            if (this.currentCommandIndex < this.commands.Count - 1)
-            {
-                var command = this.commands[this.currentCommandIndex++];
-                this.commandExecutor = new CommandExecutor(command, moveLogic);
-                this.commandExecutor.Execute();
-                this.currentCommandIndex++;
-            }
+            var command = this.commands[this.currentCommandIndex++];
+            this.commandExecutor = new CommandExecutor(command, moveLogic);
+            this.commandExecutor.Execute();
+            this.currentCommandIndex++;
         }
 
         public void Undo(MoveLogic moveLogic)
         {
-            if (this.currentCommandIndex > 0)
-            {
-                var command = this.commands[--this.currentCommandIndex];
-                this.commandExecutor = new CommandExecutor(command, moveLogic);
-                this.commandExecutor.UnExecute();
-                this.currentCommandIndex--;
-            }
+            var command = this.commands[--this.currentCommandIndex];
+            this.commandExecutor = new CommandExecutor(command, moveLogic);
+            this.commandExecutor.UnExecute();
+            this.currentCommandIndex--;
         }
 
         public void Compute(MoveLogic moveLogic)
