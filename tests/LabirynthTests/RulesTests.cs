@@ -1,17 +1,17 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Labyrinth.Models;
-using Labyrinth.Logic.BoardSetupRules;
-
-namespace LabirynthTests
+﻿namespace LabirynthTests
 {
+    using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Labyrinth.Models;
+    using Labyrinth.Logic.BoardSetupRules;
+
     [TestClass]
     public class RulesTests
     {
         [TestMethod]
         public void IsStandartBoardSetupFillBoardWirhSymbols()
         {
-            var board = Board.Instance;
+            Board board = Board.Instance;
             var rules = new StandartBoardSetup();
             rules.SetGame(board);
             bool result = true;
@@ -26,6 +26,7 @@ namespace LabirynthTests
                     }
                 }
             }
+
             Assert.IsTrue(result);
         }
     }

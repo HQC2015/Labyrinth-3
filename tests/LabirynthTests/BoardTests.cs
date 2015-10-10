@@ -3,6 +3,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Labyrinth.Models;
     using Labyrinth.Models.Symbols;
+    using Labyrinth.Models.Contracts;
     using Labyrinth.Common.Enum;
 
     [TestClass]
@@ -11,16 +12,16 @@
         [TestMethod]
         public void IsBoardInstaceIsSingle()
         {
-            var board = Board.Instance;
-            var board2 = Board.Instance;
+            Board board = Board.Instance;
+            Board board2 = Board.Instance;
             Assert.AreSame(board, board2);
         }
 
         [TestMethod]
         public void IsBoardAreSameSymbolForEmptySymbol()
         {
-            var board = Board.Instance;
-            var symbol = SymbolFactory.GetSymbol(SymbolsEnum.Player);
+            Board board = Board.Instance;
+            ISymbol symbol = SymbolFactory.GetSymbol(SymbolsEnum.Player);
             board.Field.SetValue(symbol, 2, 2);
             bool result = board.AreSymbolsEqual(2, 2, SymbolFactory.GetSymbol(SymbolsEnum.Player));
             Assert.AreEqual(true, result);
@@ -38,7 +39,7 @@
         [TestMethod]
         public void IsBoardReplaceSymbols()
         {
-            var board = Board.Instance;
+            Board board = Board.Instance;
             Symbol symbolToReplace = new EmptySpaceSymbol();
             Symbol newSymbol = new FilledSpaceSymbol();
             board.Field.SetValue(symbolToReplace, 2, 2);
@@ -49,8 +50,8 @@
         [TestMethod]
         public void IsScoreboardInstaceIsSingle()
         {
-            var board = Scoreboard.Instance;
-            var board2 = Scoreboard.Instance;
+            Scoreboard board = Scoreboard.Instance;
+            Scoreboard board2 = Scoreboard.Instance;
             Assert.AreSame(board, board2);
         }
     }

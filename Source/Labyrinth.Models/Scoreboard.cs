@@ -3,19 +3,18 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Labyrinth.Models.Players;
-    using Interfaces;
+    using Labyrinth.Models.Interfaces;
 
     public class Scoreboard
     {
-        private static readonly Lazy<Scoreboard> instanceOfScoreboard = new Lazy<Scoreboard>(() => new Scoreboard());
-        public List<IPlayer> playersWithScore = new List<IPlayer>();
+        private List<IPlayer> playersWithScore = new List<IPlayer>();
+        private static readonly Lazy<Scoreboard> InstanceOfScoreboard = new Lazy<Scoreboard>(() => new Scoreboard());
 
         public static Scoreboard Instance
         {
             get
             {
-                return instanceOfScoreboard.Value;
+                return InstanceOfScoreboard.Value;
             }
         }
 
@@ -41,6 +40,7 @@
                     this.playersWithScore.Add(playerWithScore);
                 }
             }
+
             this.playersWithScore = this.playersWithScore.OrderBy(p => p.GetScore()).ToList();
         }
     }

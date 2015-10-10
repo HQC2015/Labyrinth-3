@@ -33,13 +33,14 @@
                     {
                         this.Successor.ProcessCommand(command, player);
                     }
+
                     break;
             }
         }
 
         public override void UnProcessCommand(string command, IPlayer player)
         {
-            this.ProcessCommand(Undo(command), player);
+            this.ProcessCommand(this.Undo(command), player);
         }
 
         public void Execute(string command, IPlayer player)

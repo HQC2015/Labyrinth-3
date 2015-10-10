@@ -18,8 +18,6 @@
 
         private Command command;
         private IPlayer player;
-        // .............................................................
-
         private bool mazeHasSolution; // shows if the random generated labyrinth has an exit route.
         private bool playing; // game in progress.
 
@@ -45,7 +43,7 @@
             while (this.mazeHasSolution == false)
             {
                 this.boardSetupRules.SetGame(Board.Instance);
-                SolutionChecker(Board.Instance, GlobalConstants.PlayerStartPositionX, GlobalConstants.PlayerStartPositionY);
+                this.SolutionChecker(Board.Instance, GlobalConstants.PlayerStartPositionX, GlobalConstants.PlayerStartPositionY);
             }
 
             this.renderer.RenderBoard(Board.Instance);
@@ -103,7 +101,7 @@
             string name = Console.ReadLine();
             this.player.SetName(name);
             Scoreboard.Instance.AddScore(this.player);
-            this.renderer.RenderMessage(string.Format(Messages.ShowPlayerScoreMessage, player.GetScore()));
+            this.renderer.RenderMessage(string.Format(Messages.ShowPlayerScoreMessage, this.player.GetScore()));
             this.renderer.RenderScoreboard(Scoreboard.Instance);
 
             this.renderer.RenderMessage(Messages.StartANewGameMessage);

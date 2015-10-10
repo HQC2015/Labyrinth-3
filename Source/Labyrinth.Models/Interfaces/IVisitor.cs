@@ -1,7 +1,7 @@
-﻿using Labyrinth.Models.Interfaces;
-
-namespace Labyrinth.Logic.Commands
+﻿namespace Labyrinth.Logic.Commands
 {
+    using Labyrinth.Models.Interfaces;
+
     public interface IVisitor
     {
         void SetVisitCommand(string command);

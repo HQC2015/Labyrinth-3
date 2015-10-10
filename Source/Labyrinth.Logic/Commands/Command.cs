@@ -6,13 +6,12 @@
 
     public class Command
     {
+        private readonly IPlayer player;
         private readonly List<string> commands;
-        private int currentCommandIndex;
-        private string currentCommand;
-
         private readonly CommandExecutor standartCommandExecutor;
         private readonly CommandExecutor diagonalCommandExecutor;
-        private readonly IPlayer player;
+        private int currentCommandIndex;
+        private string currentCommand;
 
         public Command(IPlayer player)
         {
@@ -50,7 +49,7 @@
         {
             if (this.currentCommandIndex < this.commands.Count)
             {
-                var command = this.commands[this.currentCommandIndex];
+                string command = this.commands[this.currentCommandIndex];
                 this.standartCommandExecutor.ProcessCommand(command, this.player);
                 this.currentCommandIndex++;
             }
@@ -61,7 +60,7 @@
             if (this.currentCommandIndex > 0)
             {
                 this.currentCommandIndex--;
-                var command = this.commands[this.currentCommandIndex];
+                string command = this.commands[this.currentCommandIndex];
                 this.standartCommandExecutor.UnProcessCommand(command, this.player);
             }
         }

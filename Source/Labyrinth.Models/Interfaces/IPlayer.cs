@@ -1,8 +1,5 @@
-﻿
-
-namespace Labyrinth.Models.Interfaces
+﻿namespace Labyrinth.Models.Interfaces
 {
-    using Labyrinth.Logic.Commands;
     using Players;
 
     public interface IPlayer : IVisitable
@@ -24,6 +21,5 @@ namespace Labyrinth.Models.Interfaces
         int GetScore();
 
         string Print();
-        
     }
 }
