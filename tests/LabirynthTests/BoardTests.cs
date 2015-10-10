@@ -17,14 +17,23 @@
         }
 
         [TestMethod]
-        public void IsBoardAreSameSymbolReturnsRight()
+        public void IsBoardAreSameSymbolForEmptySymbol()
         {
             var board = Board.Instance;
-            Symbol symbol = new EmptySpaceSymbol();
+            var symbol = SymbolFactory.GetSymbol(SymbolsEnum.Player);
             board.Field.SetValue(symbol, 2, 2);
-            bool result = board.AreSymbolsEqual(2, 2, SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace));
+            bool result = board.AreSymbolsEqual(2, 2, SymbolFactory.GetSymbol(SymbolsEnum.Player));
             Assert.AreEqual(true, result);
         }
+
+        //public void IsBoardAreSameSymbolForFilledSymbol()
+        //{
+        //    var board = Board.Instance;
+        //    Symbol symbol = new FilledSpaceSymbol();
+        //    board.Field.SetValue(symbol, 2, 2);
+        //    bool result = board.AreSymbolsEqual(2, 2, SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace));
+        //    Assert.AreEqual(true, result);
+        //}
 
         [TestMethod]
         public void IsBoardReplaceSymbols()
@@ -35,6 +44,14 @@
             board.Field.SetValue(symbolToReplace, 2, 2);
             board.ReplaceSymbol(2, 2, newSymbol);
             Assert.AreEqual(board.Field.GetValue(2, 2), newSymbol);
+        }
+
+        [TestMethod]
+        public void IsScoreboardInstaceIsSingle()
+        {
+            var board = Scoreboard.Instance;
+            var board2 = Scoreboard.Instance;
+            Assert.AreSame(board, board2);
         }
     }
 }

@@ -181,19 +181,3 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
-*.csproj
-*.config
-AssemblyInfo.cs
-*.csproj
-*.config
-AssemblyInfo.cs
-*.config
-*.csproj
-AssemblyInfo.cs
-*.suo
-*.StyleCop
-*.csproj
-*.sln
-AssemblyInfo.cs
-*.csproj
-*.config
