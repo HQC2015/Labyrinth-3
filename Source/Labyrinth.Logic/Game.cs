@@ -50,7 +50,7 @@
             this.playing = true;
             while (this.playing)
             {
-                this.renderer.RenderMessage(Messages.AvailableCommandsMessage);
+                this.renderer.RenderMessage(Messages.AvailableMoveCommandsMessage);
                 this.renderer.RenderMessage(this.commandController.GetAvailableCommands());
                 this.renderer.RenderMessage(Messages.EnterMoveMessage);
                 string userInput = this.inputHandler.GetInput();
@@ -82,9 +82,9 @@
                     {
                         this.commandController.ProcessCommand(userInput);
                     }
-                    catch (InvalidGameCommandException)
+                    catch (InvalidGameCommandException ex)
                     {
-                        this.renderer.RenderMessage(Messages.InvalidCommandMessage);
+                        this.renderer.RenderMessage(ex.Message);
                     }
                     finally
                     {

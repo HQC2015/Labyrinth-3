@@ -6,7 +6,7 @@
         public const string WelcomeMessage = "Welcome to \"Labyrinth\" game, where you try to escape!";
         public const string GameCommandsMessage = "Use 'top' to view the top players\n'restart' to start a new game\n'exit' to quit the game.";
         public const string EnterMoveMessage = "Enter your move: ";
-        public const string AvailableCommandsMessage = "Available Commands:";
+        public const string AvailableMoveCommandsMessage = "Available Move Commands:";
         public const string InvalidCommandMessage = "Invalid command!";
         public const string ScoreboardEnterNicknameMessage = "Please enter your nickname";
         public const string ScoreboardEmptyMessage = "The Scoreboard is empty!";
