@@ -77,7 +77,7 @@
             }
             else
             {
-                this.ProcessCommand(this.InvertCommand(command), player);
+                this.ProcessCommand(invertedCommand, player);
             }
         }
     }

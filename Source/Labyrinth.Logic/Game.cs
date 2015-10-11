@@ -38,7 +38,6 @@
                 .SetY(GlobalConstants.PlayerStartPositionY);
 
             this.renderer.RenderMessage(Messages.WelcomeMessage);
-            this.renderer.RenderMessage(Messages.GameCommandsMessage);
 
             while (this.mazeHasSolution == false)
             {
@@ -50,7 +49,9 @@
             this.playing = true;
             while (this.playing)
             {
-                this.renderer.RenderMessage(Messages.AvailableMoveCommandsMessage);
+                this.renderer.RenderMessage(Messages.DefaultCommandsMessage);
+                this.renderer.RenderMessage(Messages.DefaultGameCommandsMessage);
+                this.renderer.RenderMessage(Messages.MoveCommandsMessage);
                 this.renderer.RenderMessage(this.commandController.GetAvailableCommands());
                 this.renderer.RenderMessage(Messages.EnterMoveMessage);
                 string userInput = this.inputHandler.GetInput();

@@ -21,6 +21,23 @@
             }
         }
 
+        public override string InvertCommand(string command)
+        {
+            switch (command)
+            {
+                case "d":
+                    return "u";
+                case "u":
+                    return "d";
+                case "l":
+                    return "r";
+                case "r":
+                    return "l";
+                default:
+                    return command;
+            }
+        }
+
         public override void ProcessCommand(string command, IPlayer player)
         {
             switch (command)
@@ -60,30 +77,9 @@
             }
             else
             {
-                this.ProcessCommand(this.InvertCommand(command), player);
+                this.ProcessCommand(invertedCommand, player);
             }
         }
 
-        public override string InvertCommand(string command)
-        {
-            switch (command)
-            {
-                case "d":
-                    return "u";
-                case "u":
-                    return "d";
-                case "l":
-                    return "r";
-                case "r":
-                    return "l";
-                default:
-                    return command;
-            }
-        }
-
-        public override string ToString()
-        {
-            return this.availableCommands;
-        }
     }
 }
