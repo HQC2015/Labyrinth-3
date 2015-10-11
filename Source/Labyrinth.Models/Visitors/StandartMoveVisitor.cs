@@ -6,7 +6,7 @@
     using Labyrinth.Models.Interfaces;
     using Labyrinth.Models.Symbols;
 
-    public class StandartMoveLogicVisitor : IVisitor
+    public class StandartMoveVisitor : IVisitor
     {
         private string command;
 

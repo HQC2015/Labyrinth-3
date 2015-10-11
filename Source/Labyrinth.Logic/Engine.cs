@@ -22,7 +22,6 @@
             string userGameType;
             do
             {
-                // validate usergametype and if not valid print a message
                 userGameType = this.inputHandler.GetInput();
             }
             while (userGameType != "standart" && userGameType != "unique");
@@ -31,7 +30,7 @@
                 case "standart":
                     this.boardSetupRules = new StandartBoardSetup();
                     break;
-                case "extra":
+                case "unique":
                     // different boardSetupRules
                     break;
                 default:

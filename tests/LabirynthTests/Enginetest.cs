@@ -1,18 +1,16 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Labyrinth.Console;
-using Moq;
-using System.Collections.Generic;
-using System.IO;
-
-namespace LabirynthTests
+﻿namespace LabirynthTests
 {
+    using System;
+    using System.IO;
+    using System.Collections.Generic;
+    using Moq;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Labyrinth.Console;
+
     [TestClass]
     public class Enginetest
     {
         [TestInitialize]
-
-
         [TestMethod]
         public void TestMethod()
         {
@@ -27,7 +25,6 @@ namespace LabirynthTests
 
             Assert.AreEqual(1, outLines.Count);
             Assert.AreEqual("foo", outLines[0]);
-            
         }
     }
 }

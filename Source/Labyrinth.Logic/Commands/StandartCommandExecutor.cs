@@ -1,15 +1,24 @@
 ﻿namespace Labyrinth.Logic.Commands
 {
-    using Models.Interfaces;
-    using Models.Visitors;
+    using System;
+    using Labyrinth.Models.Interfaces;
+    using Labyrinth.Models.Visitors;
 
-    public class StandartCommandExecutor : CommandExecutor, ICommandExecutor
+    public class StandartCommandExecutor : CommandExecutor
     {
-        private readonly IVisitor visitor;
+        private readonly string availableCommands = "L=left, R=right, D=down, U=up";
 
-        public StandartCommandExecutor()
+        public StandartCommandExecutor(IVisitor visitor)
         {
-            this.visitor = new StandartMoveLogicVisitor();
+            this.visitor = visitor;
+        }
+
+        protected override string AvailableCommands
+        {
+            get
+            {
+                return this.availableCommands;
+            }
         }
 
         public override void ProcessCommand(string command, IPlayer player)
@@ -33,6 +42,10 @@
                     {
                         this.Successor.ProcessCommand(command, player);
                     }
+                    else
+                    {
+                        throw new InvalidGameCommandException("Invalid game move!");
+                    }
 
                     break;
             }
@@ -40,16 +53,18 @@
 
         public override void UnProcessCommand(string command, IPlayer player)
         {
-            this.ProcessCommand(this.Undo(command), player);
+            string invertedCommand = this.InvertCommand(command);
+            if (invertedCommand == command && this.Successor != null)
+            {
+                this.Successor.UnProcessCommand(command, player);
+            }
+            else
+            {
+                this.ProcessCommand(this.InvertCommand(command), player);
+            }
         }
 
-        public void Execute(string command, IPlayer player)
-        {
-            this.visitor.SetVisitCommand(command);
-            player.Accept(this.visitor);
-        }
-
-        public string Undo(string command)
+        public override string InvertCommand(string command)
         {
             switch (command)
             {
@@ -64,6 +79,11 @@
                 default:
                     return command;
             }
+        }
+
+        public override string ToString()
+        {
+            return this.availableCommands;
         }
     }
 }

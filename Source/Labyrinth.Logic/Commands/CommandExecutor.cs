@@ -2,17 +2,19 @@
 {
     using Labyrinth.Models.Interfaces;
 
-    public abstract class CommandExecutor
+    public abstract class CommandExecutor : CommandReceiver, ICommandExecutor
     {
-        protected CommandExecutor Successor { get; set; }
+        protected abstract string AvailableCommands { get; }
 
-        public void SetSuccessor(CommandExecutor successor)
-        {
-            this.Successor = successor;
-        }
+        public abstract string InvertCommand(string command);
 
         public abstract void ProcessCommand(string command, IPlayer player);
 
         public abstract void UnProcessCommand(string command, IPlayer player);
+
+        public override string ToString()
+        {
+            return this.AvailableCommands;
+        }
     }
 }
