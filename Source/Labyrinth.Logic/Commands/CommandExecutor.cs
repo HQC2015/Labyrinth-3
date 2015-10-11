@@ -1,6 +1,7 @@
 ﻿namespace Labyrinth.Logic.Commands
 {
     using Labyrinth.Models.Interfaces;
+    using Labyrinth.Logic.Interfaces;
 
     public abstract class CommandExecutor : CommandReceiver, ICommandExecutor
     {
