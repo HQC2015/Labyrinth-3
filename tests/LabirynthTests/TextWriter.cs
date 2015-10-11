@@ -7,8 +7,6 @@ namespace LabirynthTests
 {
     public class MyTextWriter : TextWriter
     {
-        public List<string> messages = new List<string>();
-
         public override Encoding Encoding
         {
             get
@@ -17,15 +15,24 @@ namespace LabirynthTests
             }
         }
 
-        public override void WriteLine(string msg)
+        public override void WriteLine()
         {
-            messages[0] = msg;
-            this.Return();
+            this.Return("\n");
         }
 
-        public string Return()
+        public override void WriteLine(string msg)
         {
-            return messages[0];
+            this.Return(msg);
+        }
+
+        public override void Write(string msg)
+        {
+            this.Write(msg);
+        }
+
+        public string Return(string msg)
+        {
+            return msg;
         }
     }
 }

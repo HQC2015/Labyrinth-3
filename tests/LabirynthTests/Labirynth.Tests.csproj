@@ -61,8 +61,9 @@
     <Compile Include="RulesTests.cs" />
     <Compile Include="SymbolTests.cs" />
     <Compile Include="ScoreboardTests.cs" />
-    <Compile Include="Enginetest.cs" />
+    <Compile Include="RendererTest.cs" />
     <Compile Include="TextWriter.cs" />
+    <Compile Include="EngineTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\Labyrinth.Common\Labyrinth.Common.csproj">
