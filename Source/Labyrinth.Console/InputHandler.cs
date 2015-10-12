@@ -5,7 +5,7 @@
 
     public class InputHandler : IInputHandler
     {
-        public string GetInput()
+        public virtual string GetInput()
         {
             return Console.ReadLine();
         }

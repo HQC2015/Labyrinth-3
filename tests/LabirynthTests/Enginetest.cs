@@ -1,10 +1,9 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Labyrinth.Logic;
-using Labyrinth.Console;
-
-namespace LabirynthTests
+﻿namespace LabirynthTests
 {
+    using Labyrinth.Console;
+    using Labyrinth.Logic;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class EngineTest
     {
@@ -26,10 +25,18 @@ namespace LabirynthTests
         }
 
         [TestMethod]
-        public void test()
+        public void IsInputHandlerReturnsRightInstance()
         {
             var input = new InputHandler();
             Assert.IsInstanceOfType(input, typeof(InputHandler));
+        }
+
+        [TestMethod]
+        public void IsEngineMakeStandartGameRules()
+        {
+            var renderer = new Renderer();
+            var input = new InputHandler();
+            var engine = new Engine(renderer, input);
         }
     }
 }

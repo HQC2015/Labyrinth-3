@@ -1,9 +1,8 @@
 ﻿namespace LabirynthTests
 {
-    using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Labyrinth.Models;
     using Labyrinth.Logic.BoardSetupRules;
+    using Labyrinth.Models;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class RulesTests

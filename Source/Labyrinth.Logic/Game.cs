@@ -1,14 +1,14 @@
 ﻿namespace Labyrinth.Logic
 {
     using System;
-    using Contracts;
-    using Models;
-    using Models.Players;
-    using Models.Symbols;
+    using Commands;
     using Common;
     using Common.Enum;
+    using Contracts;
+    using Models;
     using Models.Interfaces;
-    using Commands;
+    using Models.Players;
+    using Models.Symbols;
 
     public class Game
     {

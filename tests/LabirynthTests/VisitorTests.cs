@@ -1,16 +1,12 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Labyrinth.Models.Interfaces;
-using Moq;
-using Labyrinth.Logic.Commands;
-using Labyrinth.Models.Visitors;
-using Labyrinth.Models.Players;
-using Labyrinth.Models;
-using Labyrinth.Common.Enum;
-using Labyrinth.Models.Symbols;
-
-namespace LabirynthTests
+﻿namespace LabirynthTests
 {
+    using Labyrinth.Common.Enum;
+    using Labyrinth.Models;
+    using Labyrinth.Models.Players;
+    using Labyrinth.Models.Symbols;
+    using Labyrinth.Models.Visitors;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     [TestClass]
     public class VisitorTests
     {

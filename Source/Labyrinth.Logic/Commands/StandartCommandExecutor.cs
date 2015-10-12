@@ -80,6 +80,5 @@
                 this.ProcessCommand(invertedCommand, player);
             }
         }
-
     }
 }

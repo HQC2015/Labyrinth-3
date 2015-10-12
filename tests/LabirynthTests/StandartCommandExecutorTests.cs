@@ -1,11 +1,9 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Labyrinth.Logic.Commands;
-using Moq;
-using Labyrinth.Models.Players;
-
-namespace LabirynthTests
+﻿namespace LabirynthTests
 {
+    using Labyrinth.Logic.Commands;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
+
     [TestClass]
     public class StandartCommandExecutorTests
     {
@@ -16,7 +14,6 @@ namespace LabirynthTests
             var result = new StandartCommandExecutor(mockWriter.Object);
             Assert.IsInstanceOfType(result, typeof(StandartCommandExecutor));
         }
-
 
         [TestMethod]
         public void IsSCTRevertComandDown()
@@ -62,15 +59,5 @@ namespace LabirynthTests
             string result = commandExecutor.InvertCommand("m");
             Assert.AreEqual("m", result);
         }
-
-        //[TestMethod]
-        //public void IsSCTProcessToRightExecute()
-        //{
-        //    var player = new Player();
-        //    var mockWriter = new Mock<IVisitor>();
-        //    var commandExecutor = new StandartCommandExecutor(mockWriter.Object);
-        //    commandExecutor.ProcessCommand("u", player);
-        //    Assert.AreEqual("m", result);
-        //}
     }
 }

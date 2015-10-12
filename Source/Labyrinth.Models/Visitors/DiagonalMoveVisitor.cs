@@ -1,10 +1,10 @@
 ﻿namespace Labyrinth.Models.Visitors
 {
-    using Labyrinth.Logic.Commands;
-    using Labyrinth.Models.Interfaces;
-    using Labyrinth.Models.Symbols;
-    using Labyrinth.Common.Enum;
-
+    using Common.Enum;
+    using Interfaces;
+    using Logic.Commands;
+    using Symbols;
+    
     public class DiagonalMoveVisitor : IVisitor
     {
         private string command;

@@ -65,9 +65,9 @@
     <Compile Include="TextWriter.cs" />
     <Compile Include="EngineTest.cs" />
     <Compile Include="StandartCommandExecutorTests.cs" />
-    <Compile Include="CommandCotrollerTests.cs" />
     <Compile Include="GameTests.cs" />
     <Compile Include="PlayerTests.cs" />
+    <Compile Include="CommandRecieverTests.cs" />
     <Compile Include="VisitorTests.cs" />
   </ItemGroup>
   <ItemGroup>

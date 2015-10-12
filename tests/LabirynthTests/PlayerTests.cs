@@ -1,11 +1,10 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Labyrinth.Models.Players;
-using Moq;
-using Labyrinth.Logic.Commands;
-
-namespace LabirynthTests
+﻿namespace LabirynthTests
 {
+    using Labyrinth.Logic.Commands;
+    using Labyrinth.Models.Players;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
+    
     [TestClass]
     public class PlayerTests
     {

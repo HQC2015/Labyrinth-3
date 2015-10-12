@@ -1,10 +1,9 @@
 ﻿namespace LabirynthTests
 {
-    using System;
     using System.Collections.Generic;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Labyrinth.Models;
     using Labyrinth.Models.Players;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class ScoreboardTests

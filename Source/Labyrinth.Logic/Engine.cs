@@ -1,8 +1,8 @@
 ﻿namespace Labyrinth.Logic
 {
-    using Labyrinth.Logic.Contracts;
     using BoardSetupRules;
     using Common;
+    using Contracts;
 
     public class Engine : IEngine
     {

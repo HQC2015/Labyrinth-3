@@ -1,16 +1,12 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Labyrinth.Logic;
-using Labyrinth.Console;
-using Labyrinth.Logic.BoardSetupRules;
-using Moq;
-using Labyrinth.Logic.Contracts;
-using Labyrinth.Models.Players;
-using Labyrinth.Logic.Commands;
-using Labyrinth.Models;
-
-namespace LabirynthTests
+﻿namespace LabirynthTests
 {
+    using Labyrinth.Console;
+    using Labyrinth.Logic;
+    using Labyrinth.Logic.BoardSetupRules;
+    using Labyrinth.Logic.Contracts;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Moq;
+
     [TestClass]
     public class GameTests
     {
@@ -32,19 +28,24 @@ namespace LabirynthTests
             Assert.IsInstanceOfType(game, typeof(Game));
         }
 
-        //[TestMethod]
-        //public void IsGameStart()
-        //{
-        //    //var mockRender = new Renderer();
-        //    //var input = new InputHandler();
-        //    //var gamerules = new StandartBoardSetup();
-        //    //var player = new Player();
-        //    //var commandController = new CommandController(player);
-        //    //var board = Board.Instance;
-        //    //var game = new Game(mockRender, input, gamerules);
-        //    //game.Start();
-        //    //Assert.AreEqual(0, player.GetScore());
-        //    
-        //}
+        ////[TestMethod]
+        ////public void IsGameStart()
+        ////{
+        ////    var mockRender = new Mock<IRenderer>();
+        ////    var input = new Mock<InputHandler>();
+        ////    var gamerules = new StandartBoardSetup();
+        ////    var board = Board.Instance;
+        ////    var game = new Game(mockRender.Object, input.Object, gamerules);
+        ////    var queueStuff = new Queue<string>();
+        ////    queueStuff.Enqueue("top");
+        ////    queueStuff.Enqueue("exit");
+        ////    //var action = "top";
+        ////    input.Setup(x => x.GetInput()).Returns(queueStuff.Dequeue);
+        ////    game.Start();
+        ////    mockRender.Verify(x => x.RenderMessage(It.IsAny<string>()), Times.Exactly(4));
+        ////    //PrivateObject po = new PrivateObject("player");
+        ////    //var result = po.Invoke("GetScore");
+        ////    //Assert.AreEqual(0, result);
+        ////}
     }
 }

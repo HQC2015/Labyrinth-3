@@ -1,9 +1,9 @@
 ﻿namespace Labyrinth.Logic.Commands
 {
-    using System.Text;
     using System.Collections.Generic;
-    using Labyrinth.Models.Interfaces;
-    using Labyrinth.Models.Visitors;
+    using System.Text;
+    using Models.Interfaces;
+    using Models.Visitors;
 
     public class CommandController
     {

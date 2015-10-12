@@ -1,10 +1,10 @@
 ﻿namespace LabirynthTests
 {
     using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Labyrinth.Common.Enum;
-    using Labyrinth.Models.Symbols;
     using Labyrinth.Models.Contracts;
+    using Labyrinth.Models.Symbols;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class SymbolTests
