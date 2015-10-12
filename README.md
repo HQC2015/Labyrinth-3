@@ -1,7 +1,9 @@
 ﻿High-Quality Programming Code – Team 'Labyrinth-3'
 =============================================
 
-#### [More detailed information about the Assignment](https://github.com/TelerikAcademy/High-Quality-Code/tree/master/Teamwork "TelerikAcademy High-Quality-Code")
+#### [More detailed information about the Assignment](https://github.com/TelerikAcademy/High-Quality-
+
+Code/tree/master/Teamwork "TelerikAcademy High-Quality-Code")
 
 Team Members
 --------
@@ -65,7 +67,9 @@ Refactoring Documentation
         ```c#
         public class Board
         {
-            private static readonly Lazy<Board> InstanceOfBoard = new Lazy<Board>(() => new Board(GlobalConstants.LabyrinthSizeRow, GlobalConstants.LabyrinthSizeCol));
+            private static readonly Lazy<Board> InstanceOfBoard = new Lazy<Board>(() => new Board
+
+(GlobalConstants.LabyrinthSizeRow, GlobalConstants.LabyrinthSizeCol));
 
             private Board(int labyrinthSizeRow, int labyrinthSizeCol)
             {
@@ -98,7 +102,9 @@ Refactoring Documentation
     - **Lazy Load**
         - used for `Board.cs`
         ```c#
-        private static readonly Lazy<Board> InstanceOfBoard = new Lazy<Board>(() => new Board(GlobalConstants.LabyrinthSizeRow, GlobalConstants.LabyrinthSizeCol));
+        private static readonly Lazy<Board> InstanceOfBoard = new Lazy<Board>(() => new Board(GlobalConstants.LabyrinthSizeRow, 
+
+GlobalConstants.LabyrinthSizeCol));
         ```
         - used for `Scoreboard.cs`
         ```c#
@@ -213,7 +219,9 @@ Refactoring Documentation
 		- added new class `CommandController.cs`
 			- private List<string> commands - field for saving coomands 
 			- ProcessCommand
-			- Undo( ) and Redo( ) functionality - works with commands field to get the right command, then passes it to the commandExecutors chain calling the first commandExecutor.ProcessCommand( )
+			- Undo( ) and Redo( ) functionality - works with commands field to get the right command, then 
+
+passes it to the commandExecutors chain calling the first commandExecutor.ProcessCommand( )
 			- ProcessCommand( ) - processes command to CommandExecutor or throw exception if it is invalid
 			- Compute () - process the command to CommandExecutor
 
