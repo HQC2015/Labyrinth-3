@@ -10,7 +10,7 @@
 
         public DiagonalCommandExecutor(IVisitor visitor)
         {
-            this.visitor = visitor;
+            this.Visitor = visitor;
         }
 
         protected override string AvailableCommands

@@ -4,7 +4,7 @@
 
     public abstract class CommandReceiver
     {
-        protected IVisitor visitor;
+        protected IVisitor Visitor { get; set; }
 
         protected CommandExecutor Successor { get; set; }
 
@@ -15,8 +15,8 @@
 
         protected virtual void Execute(string command, IPlayer player)
         {
-            this.visitor.SetVisitCommand(command);
-            player.Accept(this.visitor);
+            this.Visitor.SetVisitCommand(command);
+            player.Accept(this.Visitor);
         }
     }
 }
