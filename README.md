@@ -1,9 +1,7 @@
 ﻿High-Quality Programming Code – Team 'Labyrinth-3'
 =============================================
 
-#### [More detailed information about the Assignment](https://github.com/TelerikAcademy/High-Quality-
-
-Code/tree/master/Teamwork "TelerikAcademy High-Quality-Code")
+#### [More detailed information about the Assignment](https://github.com/TelerikAcademy/High-Quality-Code/tree/master/Teamwork "TelerikAcademy High-Quality-Code")
 
 Team Members
 --------
@@ -212,48 +210,194 @@ Refactoring Documentation
             }
         ```
 
-2.  Added **Behaivor patterns**
-	- Command
+2.  Added **Behaviour patterns**
+	- **Command**
+	    - added new interface ICommndExecutor - for more abstraction
+	    ```c#
+        public interface ICommandExecutor
+        {
+            void ProcessCommand(string command, IPlayer player);
+
+            void UnProcessCommand(string command, IPlayer player);
+
+            string InvertCommand(string command);
+        }
+        ```
+        - added new abstract class `CommandExecutor.cs` so all CommandExecutors should implement it, also it combines **Chain of Responsibility** design pattern using `CommandReceiver.cs`; AvailableCommands field is used so that every child should state its implemented commands
+        ```c#
+        public abstract class CommandExecutor : CommandReceiver, ICommandExecutor
+        {
+            protected abstract string AvailableCommands { get; }
+
+            public abstract string InvertCommand(string command);
+
+            public abstract void ProcessCommand(string command, IPlayer player);
+
+            public abstract void UnProcessCommand(string command, IPlayer player);
+
+            public override string ToString()
+            {
+                return this.AvailableCommands;
+            }
+        }
+        ```
 		- added new class `CommandController.cs`
-			- private List<string> commands - field for saving coomands 
-			- ProcessCommand
-			- Undo( ) and Redo( ) functionality - works with commands field to get the right command, then 
+			- field for saving coomands 
+			```c#
+            private readonly List<string> commands;
+            ```
+			- ProcessCommand method
+			```c#
+            public void ProcessCommand(string command)
+            {
+                this.currentCommand = command;
+                switch (command)
+                {
+                    case "b":
+                        this.Undo();
+                        break;
+                    case "f":
+                        this.Redo();
+                        break;
+                    default:
+                        this.Compute();
+                        break;
+                }
+            }
+            ```
+			- *Undo()* and *Redo()* functionality, works with commands field to get the right command, then passes it to the commandExecutors chain calling on the first commandExecutor.ProcessCommand()
+			```c#
+		    private void Undo()
+            {
+                if (this.currentCommandIndex > 0)
+                {
+                    this.currentCommandIndex--;
+                    string command = this.commands[this.currentCommandIndex];
+                    this.commandExecutors[0].UnProcessCommand(command, this.player);
+                }
+            }
+            ```
+            ```c#
+            private void Redo()
+            {
+                if (this.currentCommandIndex < this.commands.Count)
+                {
+                    string command = this.commands[this.currentCommandIndex];
+                    this.commandExecutors[0].ProcessCommand(command, this.player);
+                    this.currentCommandIndex++;
+                }
+            }
+			```
+			- also *Compute()* method for processing any command different to Undo and Redo, then passes it to the commandExecutors chain calling on the first commandExecutor.ProcessCommand()
+			```c#
+			private void Compute()
+            {
+                this.commandExecutors[0].ProcessCommand(this.currentCommand, this.player);
+                this.commands.Add(this.currentCommand);
+                this.currentCommandIndex++;
+            }
+			```
+			- *GetAvailableCommands()* method which prints the commands of the CommandExecutors in the responsibility chain
+			```c#
+			public string GetAvailableCommands()
+            {
+                var result = new StringBuilder();
+                foreach (var commandExecutor in this.commandExecutors)
+                {
+                    result.AppendLine(commandExecutor.ToString());
+                }
 
-passes it to the commandExecutors chain calling the first commandExecutor.ProcessCommand( )
-			- ProcessCommand( ) - processes command to CommandExecutor or throw exception if it is invalid
-			- Compute () - process the command to CommandExecutor
+                return result.ToString().TrimEnd();
+            }
+			```
+		- added new class `StandartCommandExecutor.cs`
+			- *ProcessCommand()* method to process the right command, using the **Visitor** to move player
+			```c#
+			public override void ProcessCommand(string command, IPlayer player)
+            {
+                switch (command)
+                {
+                    case "d":
+                        this.Execute(command, player);
+                        break;
+                    case "u":
+                        this.Execute(command, player);
+                        break;
+                    case "l":
+                        this.Execute(command, player);
+                        break;
+                    case "r":
+                        this.Execute(command, player);
+                        break;
+                    default:
+                        if (this.Successor != null)
+                        {
+                            this.Successor.ProcessCommand(command, player);
+                        }
+                        else
+                        {
+                            throw new InvalidGameCommandException("Invalid game move!");
+                        }
 
-		- added new class CommandExecutor.cs
-			- Execute(), UnExecute() - Process the right command to MoveLogic 
-        	- Undo() - replace the command with it oposite command for back move
-		- added new interfase ICommndExecutor - for more abstraction
-
-		- added new class MoveLogic.cs
-			- class where we put all move logic and it is inherit IMoveLogic so we can implement new kind of 
-
-MoveLogic in any time
-			
-	- Observer
-
-		- added new class PlayerObserver.cs
-			- class for observing player coordinates, used for removing dependency between MoveLogic and 
-
-Renderer.
-			- List<IObservered> listeners - save all objects who need player coordinates.
-			- Attach(IObservered listener), Dettach(IObservered listener) - methods for adding and removing 
-
-listeners 
-			- Notify() - method who inform listeners for changing any player coordinates or current score, work in 
-
-all properties setters
-			- <set
-                this.playerY = value;
-                this.Notify();>
-
-		- added new interface IObservered - strange name because of conflict with the c# IObservable
-			- Update() - set new coordinates and current score in listeners 
-	- Memento
-		- added class Save.cs
+                        break;
+                }
+            }
+			```
+        	- *InvertCommand()* method to replace the command with it oposite command for back move
+        	```c#
+        	public override string InvertCommand(string command)
+            {
+                switch (command)
+                {
+                    case "d":
+                        return "u";
+                    case "u":
+                        return "d";
+                    case "l":
+                        return "r";
+                    case "r":
+                        return "l";
+                    default:
+                        return command;
+                }
+            }
+        	```
+        	- *UnProcessCommand()* method which uses *InvertCommand()* to do the Undo functionallity
+        	```c#
+        	public override void UnProcessCommand(string command, IPlayer player)
+            {
+                string invertedCommand = this.InvertCommand(command);
+                if (invertedCommand == command && this.Successor != null)
+                {
+                    this.Successor.UnProcessCommand(command, player);
+                }
+                else
+                {
+                    this.ProcessCommand(invertedCommand, player);
+                }
+            }
+        	```
+		- added new class `DiagonalCommandExecutor.cs` which has the same functionalities but with different key commands such as
+		```c#
+		public override string InvertCommand(string command)
+        {
+            switch (command)
+            {
+                case "ur":
+                    return "dl";
+                case "ul":
+                    return "dr";
+                case "dr":
+                    return "ul";
+                case "dl":
+                    return "ur";
+                default:
+                    return command;
+            }
+        }
+		```
+	- **Chain of Responsibility**
+	- **Visitor**
 
 3.  Added **Structural Patterns**
 
@@ -262,7 +406,7 @@ all properties setters
 
 #### Added functionalities
 ---
-	
+1.  Diagonal Movement
 
 
 
