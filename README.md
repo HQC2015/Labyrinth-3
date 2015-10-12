@@ -17,7 +17,8 @@ Team Members
 
 Refactoring Documentation
 ------------------------------------------------------
-### Refactoring the entire project
+#### Refactoring the entire project
+---
 1.  Redesigned the project structure: Team "Labyringth-3"
 	-   Renamed the project solution from `kursov_proekt` to `Labyrinth-3`.
 	-   Extracted from the main file `Program.cs`, each class in separate file - `Game.cs`, `Player.cs` etc.
@@ -59,17 +60,16 @@ Refactoring Documentation
         * ScoreboardEmptyMessage = "The Scoreboard is empty!"
         * ExitMessage = "GoodBye!"
 4.  Changed DisplayLabyrinth() logic
+
+#### Implementing Design Patterns
 ---
-### Implementing Design Patterns
 1.  Added **Creational patterns**
 	- **Singleton**
 		-  used for `Board.cs`
         ```c#
         public class Board
         {
-            private static readonly Lazy<Board> InstanceOfBoard = new Lazy<Board>(() => new Board
-
-(GlobalConstants.LabyrinthSizeRow, GlobalConstants.LabyrinthSizeCol));
+            private static readonly Lazy<Board> InstanceOfBoard = new Lazy<Board>(() => new Board(GlobalConstants.LabyrinthSizeRow, GlobalConstants.LabyrinthSizeCol));
 
             private Board(int labyrinthSizeRow, int labyrinthSizeCol)
             {
@@ -102,9 +102,7 @@ Refactoring Documentation
     - **Lazy Load**
         - used for `Board.cs`
         ```c#
-        private static readonly Lazy<Board> InstanceOfBoard = new Lazy<Board>(() => new Board(GlobalConstants.LabyrinthSizeRow, 
-
-GlobalConstants.LabyrinthSizeCol));
+        private static readonly Lazy<Board> InstanceOfBoard = new Lazy<Board>(() => new Board(GlobalConstants.LabyrinthSizeRow, GlobalConstants.LabyrinthSizeCol));
         ```
         - used for `Scoreboard.cs`
         ```c#
@@ -259,11 +257,11 @@ all properties setters
 
 3.  Added **Structural Patterns**
 
+#### Unit tests
 ---
-### Unit tests
 
+#### Added functionalities
 ---
-### Added functionalities
 	
 
 
