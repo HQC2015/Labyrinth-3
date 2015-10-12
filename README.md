@@ -1,7 +1,9 @@
 ﻿High-Quality Programming Code – Team 'Labyrinth-3'
 =============================================
 
-#### [More detailed information about the Assignment](https://github.com/TelerikAcademy/High-Quality-Code/tree/master/Teamwork "TelerikAcademy High-Quality-Code")
+#### [More detailed information about the Assignment](https://github.com/TelerikAcademy/High-Quality-
+
+Code/tree/master/Teamwork "TelerikAcademy High-Quality-Code")
 
 Team Members
 --------
@@ -211,7 +213,7 @@ Refactoring Documentation
         ```
 
 2.  Added **Behaviour patterns**
-	- **Command**
+	- **Command** used to deal with the user input commands
 	    - added new interface ICommndExecutor - for more abstraction
 	    ```c#
         public interface ICommandExecutor
@@ -396,9 +398,102 @@ Refactoring Documentation
             }
         }
 		```
-	- **Chain of Responsibility**
-	- **Visitor**
+	- **Chain of Responsibility** used to find the one CommandExecutor who understands the input command 
+	    - added new abstract class `CommandReceiver.cs` which is responsible for the chain
+	        - field for successor (the one in the chain who can do the operation)
+	        ```c#
+	        protected CommandExecutor Successor { get; set; }
+	        ```
+	        - method *SetSuccessor()* to assign the sucessor
+	        ```c#
+	        public void SetSuccessor(CommandExecutor successor)
+            {
+                this.Successor = successor;
+            }
+	        ```
+	        - method *Execute()* so that the successor do its job, it also uses the implemented **Visitor** pattern
+	        ```c#
+	        protected virtual void Execute(string command, IPlayer player)
+            {
+                this.Visitor.SetVisitCommand(command);
+                player.Accept(this.Visitor);
+            }
+	        ```
+	- **Visitor** used to change the `Player.cs` coordinates and score
+	    - added new interface `IVisitor.cs`
+	    ```c#
+	    public interface IVisitor
+        {
+            void SetVisitCommand(string command);
 
+            void Visit(IPlayer player);
+        }
+	    ```
+	    - added new interface `IVisitable.cs`
+	    ```c#
+        public interface IVisitable
+        {
+            void Accept(IVisitor visitor);
+        }
+	    ```
+	    - added a property to the abstract class `CommandReceiver.cs`
+	    ```c#
+	    protected IVisitor Visitor { get; set; }
+	    ```
+	    - added class `StandartMoveVisitor.cs`
+	        - field for command that must be executed on the IVisitable object
+	        ```c#
+	        private string command;
+	        ```
+	        - method *SetVisitCommand()* to set that command
+	        ```c#
+	        public void SetVisitCommand(string command)
+            {
+                this.command = command;
+            }
+	        ```
+	        - method *Visit()* to modify the IVisitable object(Player)
+	        ```c#
+	        public void Visit(IPlayer player)
+            {
+                switch (this.command.ToLower())
+                {
+                    case "d":
+                        if (Board.Instance.AreSymbolsEqual(player.GetX() + 1, player.GetY(), SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace)))
+                        {
+                            player.SetX(player.GetX() + 1);
+                            player.SetScore(player.GetScore() + 1);
+                        }
+
+                        break;
+                    case "u":
+                        if (Board.Instance.AreSymbolsEqual(player.GetX() - 1, player.GetY(), SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace)))
+                        {
+                            player.SetX(player.GetX() - 1);
+                            player.SetScore(player.GetScore() + 1);
+                        }
+
+                        break;
+                    case "r":
+                        if (Board.Instance.AreSymbolsEqual(player.GetX(), player.GetY() + 1, SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace)))
+                        {
+                            player.SetY(player.GetY() + 1);
+                            player.SetScore(player.GetScore() + 1);
+                        }
+
+                        break;
+                    case "l":
+                        if (Board.Instance.AreSymbolsEqual(player.GetX(), player.GetY() - 1, SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace)))
+                        {
+                            player.SetY(player.GetY() - 1);
+                            player.SetScore(player.GetScore() + 1);
+                        }
+
+                        break;
+                }
+            }
+	        ```
+	    
 3.  Added **Structural Patterns**
 
 #### Unit tests

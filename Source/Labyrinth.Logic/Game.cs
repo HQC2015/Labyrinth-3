@@ -79,6 +79,8 @@
                 }
                 else
                 {
+                    var currentPlayerX = this.player.GetX();
+                    var currentPlayerY = this.player.GetY();
                     try
                     {
                         this.commandController.ProcessCommand(userInput);
@@ -89,6 +91,8 @@
                     }
                     finally
                     {
+                        Board.Instance.ReplaceSymbol(currentPlayerX, currentPlayerY, SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace));
+                        Board.Instance.ReplaceSymbol(this.player.GetX(), this.player.GetY(), SymbolFactory.GetSymbol(SymbolsEnum.Player));
                         this.renderer.RenderBoard(Board.Instance);
                     }
 

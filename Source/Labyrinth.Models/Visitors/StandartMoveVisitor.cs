@@ -22,8 +22,6 @@
                 case "d":
                     if (Board.Instance.AreSymbolsEqual(player.GetX() + 1, player.GetY(), SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace)))
                     {
-                        Board.Instance.ReplaceSymbol(player.GetX(), player.GetY(), SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace));
-                        Board.Instance.ReplaceSymbol(player.GetX() + 1, player.GetY(), SymbolFactory.GetSymbol(SymbolsEnum.Player));
                         player.SetX(player.GetX() + 1);
                         player.SetScore(player.GetScore() + 1);
                     }
@@ -32,8 +30,6 @@
                 case "u":
                     if (Board.Instance.AreSymbolsEqual(player.GetX() - 1, player.GetY(), SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace)))
                     {
-                        Board.Instance.ReplaceSymbol(player.GetX(), player.GetY(), SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace));
-                        Board.Instance.ReplaceSymbol(player.GetX() - 1, player.GetY(), SymbolFactory.GetSymbol(SymbolsEnum.Player));
                         player.SetX(player.GetX() - 1);
                         player.SetScore(player.GetScore() + 1);
                     }
@@ -42,8 +38,6 @@
                 case "r":
                     if (Board.Instance.AreSymbolsEqual(player.GetX(), player.GetY() + 1, SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace)))
                     {
-                        Board.Instance.ReplaceSymbol(player.GetX(), player.GetY(), SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace));
-                        Board.Instance.ReplaceSymbol(player.GetX(), player.GetY() + 1, SymbolFactory.GetSymbol(SymbolsEnum.Player));
                         player.SetY(player.GetY() + 1);
                         player.SetScore(player.GetScore() + 1);
                     }
@@ -52,8 +46,6 @@
                 case "l":
                     if (Board.Instance.AreSymbolsEqual(player.GetX(), player.GetY() - 1, SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace)))
                     {
-                        Board.Instance.ReplaceSymbol(player.GetX(), player.GetY(), SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace));
-                        Board.Instance.ReplaceSymbol(player.GetX(), player.GetY() - 1, SymbolFactory.GetSymbol(SymbolsEnum.Player));
                         player.SetY(player.GetY() - 1);
                         player.SetScore(player.GetScore() + 1);
                     }
