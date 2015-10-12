@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-
-namespace LabirynthTests
+﻿namespace LabirynthTests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Text;
+
     public class MyTextWriter : TextWriter
     {
         public override Encoding Encoding

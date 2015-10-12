@@ -4,8 +4,10 @@
 
     public interface ICommandExecutor
     {
-        void Execute(string command, IPlayer player);
+        void ProcessCommand(string command, IPlayer player);
 
-        string Undo(string command);
+        void UnProcessCommand(string command, IPlayer player);
+
+        string InvertCommand(string command);
     }
 }

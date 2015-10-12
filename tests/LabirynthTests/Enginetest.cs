@@ -17,5 +17,19 @@ namespace LabirynthTests
 
             Assert.IsInstanceOfType(engine, typeof(Engine));
         }
+
+        [TestMethod]
+        public void IsEngineRunRight()
+        {
+            var renderer = new Renderer();
+            Assert.IsInstanceOfType(renderer, typeof(Renderer));
+        }
+
+        [TestMethod]
+        public void test()
+        {
+            var input = new InputHandler();
+            Assert.IsInstanceOfType(input, typeof(InputHandler));
+        }
     }
 }

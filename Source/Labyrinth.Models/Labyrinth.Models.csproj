@@ -56,7 +56,8 @@
     <Compile Include="Interfaces\ISymbol.cs" />
     <Compile Include="Interfaces\IVisitable.cs" />
     <Compile Include="Interfaces\IVisitor.cs" />
-    <Compile Include="Visitors\StandartMoveLogicVisitor.cs" />
+    <Compile Include="Visitors\DiagonalMoveVisitor.cs" />
+    <Compile Include="Visitors\StandartMoveVisitor.cs" />
     <Compile Include="Players\Player.cs" />
     <Compile Include="Players\PlayerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

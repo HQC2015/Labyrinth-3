@@ -5,11 +5,16 @@
 
     public class Player : IPlayer
     {
-        private readonly PlayerContext context = new PlayerContext();
+        private readonly PlayerContext context;
 
         public Player()
         {
             this.context = new PlayerContext();
+        }
+
+        public Player(PlayerContext context)
+        {
+            this.context = context;
         }
 
         public Player SetName(string name)

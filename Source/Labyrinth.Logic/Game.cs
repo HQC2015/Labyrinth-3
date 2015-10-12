@@ -1,12 +1,12 @@
 ﻿namespace Labyrinth.Logic
 {
     using System;
-    using Labyrinth.Logic.Contracts;
-    using Labyrinth.Models;
-    using Labyrinth.Models.Players;
-    using Labyrinth.Models.Symbols;
-    using Labyrinth.Common;
-    using Labyrinth.Common.Enum;
+    using Contracts;
+    using Models;
+    using Models.Players;
+    using Models.Symbols;
+    using Common;
+    using Common.Enum;
     using Models.Interfaces;
     using Commands;
 
@@ -16,10 +16,10 @@
         private readonly IInputHandler inputHandler;
         private readonly IBoardSetup boardSetupRules;
 
-        private Command command;
+        private CommandController commandController;
         private IPlayer player;
-        private bool mazeHasSolution; // shows if the random generated labyrinth has an exit route.
-        private bool playing; // game in progress.
+        private bool mazeHasSolution;
+        private bool playing;
 
         public Game(IRenderer renderer, IInputHandler inputHandler, IBoardSetup boardSetupRules)
         {
@@ -27,7 +27,7 @@
             this.inputHandler = inputHandler;
             this.boardSetupRules = boardSetupRules;
             this.player = new Player();
-            this.command = new Command(this.player);
+            this.commandController = new CommandController(this.player);
         }
 
         public void Start()
@@ -38,7 +38,6 @@
                 .SetY(GlobalConstants.PlayerStartPositionY);
 
             this.renderer.RenderMessage(Messages.WelcomeMessage);
-            this.renderer.RenderMessage(Messages.GameCommandsMessage);
 
             while (this.mazeHasSolution == false)
             {
@@ -50,9 +49,13 @@
             this.playing = true;
             while (this.playing)
             {
+                this.renderer.RenderMessage(Messages.DefaultCommandsMessage);
+                this.renderer.RenderMessage(Messages.DefaultGameCommandsMessage);
+                this.renderer.RenderMessage(Messages.MoveCommandsMessage);
+                this.renderer.RenderMessage(this.commandController.GetAvailableCommands());
                 this.renderer.RenderMessage(Messages.EnterMoveMessage);
                 string userInput = this.inputHandler.GetInput();
-                if (userInput.Length > 1)
+                if (userInput.Length > 2)
                 {
                     if (userInput == "restart")
                     {
@@ -71,18 +74,18 @@
                     }
                     else
                     {
-                        this.renderer.RenderMessage(Messages.InvalidMoveMessage);
+                        this.renderer.RenderMessage(Messages.InvalidCommandMessage);
                     }
                 }
                 else
                 {
                     try
                     {
-                        this.command.ProcessCommand(userInput);
+                        this.commandController.ProcessCommand(userInput);
                     }
-                    catch (ArgumentException)
+                    catch (InvalidGameCommandException ex)
                     {
-                        this.renderer.RenderMessage("Invalid command!");
+                        this.renderer.RenderMessage(ex.Message);
                     }
                     finally
                     {
@@ -119,12 +122,8 @@
         private void RestartGame()
         {
             this.player = new Player();
-            this.player
-                .SetScore(0)
-                .SetX(GlobalConstants.PlayerStartPositionX)
-                .SetY(GlobalConstants.PlayerStartPositionY);
             this.mazeHasSolution = false;
-            this.command = new Command(this.player);
+            this.commandController = new CommandController(this.player);
             this.Start();
         }
 

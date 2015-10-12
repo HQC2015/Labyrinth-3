@@ -7,8 +7,8 @@
 
     public class Scoreboard
     {
-        private List<IPlayer> playersWithScore = new List<IPlayer>();
         private static readonly Lazy<Scoreboard> InstanceOfScoreboard = new Lazy<Scoreboard>(() => new Scoreboard());
+        private List<IPlayer> playersWithScore = new List<IPlayer>();
 
         public static Scoreboard Instance
         {
