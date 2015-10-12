@@ -15,6 +15,7 @@ Team Members
 
 Refactoring Documentation
 ------------------------------------------------------
+### Refactoring the entire project
 1.  Redesigned the project structure: Team "Labyringth-3"
 	-   Renamed the project solution from `kursov_proekt` to `Labyrinth-3`.
 	-   Extracted from the main file `Program.cs`, each class in separate file - `Game.cs`, `Player.cs` etc.
@@ -56,8 +57,9 @@ Refactoring Documentation
         * ScoreboardEmptyMessage = "The Scoreboard is empty!"
         * ExitMessage = "GoodBye!"
 4.  Changed DisplayLabyrinth() logic
-	
-5.  Added **Creational patterns**
+---
+### Implementing Design Patterns
+1.  Added **Creational patterns**
 	- **Singleton**
 		-  used for `Board.cs`
         ```c#
@@ -206,7 +208,7 @@ Refactoring Documentation
             }
         ```
 
-6.  Added **Behaivor patterns**
+2.  Added **Behaivor patterns**
 	- Command
 		- added new class `CommandController.cs`
 			- private List<string> commands - field for saving coomands 
@@ -247,9 +249,13 @@ all properties setters
 	- Memento
 		- added class Save.cs
 
-7.  Added **Structural Patterns**
+3.  Added **Structural Patterns**
 
-8.  Unit tests
+---
+### Unit tests
+
+---
+### Added functionalities
 	
 
 
