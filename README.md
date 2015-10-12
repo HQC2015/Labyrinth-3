@@ -1,9 +1,7 @@
 ﻿High-Quality Programming Code – Team 'Labyrinth-3'
 =============================================
 
-#### [More detailed information about the Assignment](https://github.com/TelerikAcademy/High-Quality-
-
-Code/tree/master/Teamwork "Telerik Academy High-Quality-Code")
+#### [More detailed information about the Assignment](https://github.com/TelerikAcademy/High-Quality-Code/tree/master/Teamwork "TelerikAcademy High-Quality-Code")
 
 Team Members
 --------
@@ -59,158 +57,156 @@ Refactoring Documentation
         * ExitMessage = "GoodBye!"
 4.  Changed DisplayLabyrinth() logic
 	
-5.  Added Creational patterns
-
-	- Singleton
-		-  used for class `Board.cs`
-```javascript
-public class Board
-    {
-        private static readonly Lazy<Board> InstanceOfBoard = new Lazy<Board>(() => new Board(GlobalConstants.LabyrinthSizeRow, GlobalConstants.LabyrinthSizeCol));
-
-        private Board(int labyrinthSizeRow, int labyrinthSizeCol)
+5.  Added **Creational patterns**
+	- **Singleton**
+		-  used for `Board.cs`
+        ```c#
+        public class Board
         {
-            this.Field = new ISymbol[labyrinthSizeRow, labyrinthSizeCol];
-        }
+            private static readonly Lazy<Board> InstanceOfBoard = new Lazy<Board>(() => new Board(GlobalConstants.LabyrinthSizeRow, GlobalConstants.LabyrinthSizeCol));
 
-        public static Board Instance
-        {
-            get
+            private Board(int labyrinthSizeRow, int labyrinthSizeCol)
             {
-                return InstanceOfBoard.Value;
+                this.Field = new ISymbol[labyrinthSizeRow, labyrinthSizeCol];
             }
-        }
-```
-		-  used for class `Scoreboard.cs`
-```javascript
-public class Scoreboard
-    {
-        private static readonly Lazy<Scoreboard> InstanceOfScoreboard = new Lazy<Scoreboard>(() => new Scoreboard());
-        private List<IPlayer> playersWithScore = new List<IPlayer>();
 
-        public static Scoreboard Instance
-        {
-            get
+            public static Board Instance
             {
-                return InstanceOfScoreboard.Value;
+                get
+                {
+                    return InstanceOfBoard.Value;
+                }
             }
-        }
-```
-    - Lazy Load
+        ```
+		-  used for `Scoreboard.cs`
+        ```c#
+        public class Scoreboard
+        {
+            private static readonly Lazy<Scoreboard> InstanceOfScoreboard = new Lazy<Scoreboard>(() => new Scoreboard());
+            private List<IPlayer> playersWithScore = new List<IPlayer>();
+
+            public static Scoreboard Instance
+            {
+                get
+               {
+                    return InstanceOfScoreboard.Value;
+                }
+            }
+        ```
+    - **Lazy Load**
         - used for `Board.cs`
-```javascript
-private static readonly Lazy<Board> InstanceOfBoard = new Lazy<Board>(() => new Board(GlobalConstants.LabyrinthSizeRow, GlobalConstants.LabyrinthSizeCol));
-```
+        ```c#
+        private static readonly Lazy<Board> InstanceOfBoard = new Lazy<Board>(() => new Board(GlobalConstants.LabyrinthSizeRow, GlobalConstants.LabyrinthSizeCol));
+        ```
         - used for `Scoreboard.cs`
-```javascript
-private static readonly Lazy<Scoreboard> InstanceOfScoreboard = new Lazy<Scoreboard>(() => new Scoreboard());
-```
-    - Lazy Initialization
+        ```c#
+        private static readonly Lazy<Scoreboard> InstanceOfScoreboard = new Lazy<Scoreboard>(() => new Scoreboard());
+        ```
+    - **Lazy Initialization**
         - used in class `SymbolFactory.cs` for GetSymbol() method
-```javascript
-public static class SymbolFactory
-{
-    private static readonly Dictionary<SymbolsEnum, ISymbol> Symbols = new Dictionary<SymbolsEnum, ISymbol>();
+        ```c#
+        public static class SymbolFactory
+        {
+            private static readonly Dictionary<SymbolsEnum, ISymbol> Symbols = new Dictionary<SymbolsEnum, ISymbol>();
 
-    public static ISymbol GetSymbol(SymbolsEnum key)
-    {
-        // Uses "lazy initialization"
-        ISymbol symbol = null;
-        if (Symbols.ContainsKey(key))
-        {
-            symbol = Symbols[key];
-        }
-        else
-        {
-            switch (key)
+            public static ISymbol GetSymbol(SymbolsEnum key)
             {
-                case SymbolsEnum.EmptySpace:
-                    symbol = new EmptySpaceSymbol();
-                    break;
-                case SymbolsEnum.FilledSpace:
-                    symbol = new FilledSpaceSymbol();
-                    break;
-                case SymbolsEnum.Player:
-                    symbol = new PlayerSymbol();
-                    break;
-                case SymbolsEnum.Check:
-                    symbol = new CheckSymbol();
-                    break;
-                default:
-                    throw new InvalidOperationException("Wrong key for the SymbolFactory.GetSymbol(SymbolsEnum)");
+                // Uses "lazy initialization"
+                ISymbol symbol = null;
+                if (Symbols.ContainsKey(key))
+                {
+                    symbol = Symbols[key];
+                }
+                else
+                {
+                    switch (key)
+                    {
+                        case SymbolsEnum.EmptySpace:
+                            symbol = new EmptySpaceSymbol();
+                            break;
+                        case SymbolsEnum.FilledSpace:
+                            symbol = new FilledSpaceSymbol();
+                            break;
+                        case SymbolsEnum.Player:
+                            symbol = new PlayerSymbol();
+                            break;
+                        case SymbolsEnum.Check:
+                            symbol = new CheckSymbol();
+                            break;
+                        default:
+                            throw new InvalidOperationException("Wrong key for the SymbolFactory.GetSymbol(SymbolsEnum)");
+                    }
+
+                    Symbols.Add(key, symbol);
+                }
+
+                return symbol;
+            }
+        }
+        ```
+	- **Fluent Interface**
+    	- on `Player.cs` using `PlayerContext.cs`
+        ```c#
+        public class Player : IPlayer
+        {
+            private readonly PlayerContext context;
+
+            public Player()
+            {
+                this.context = new PlayerContext();
             }
 
-            Symbols.Add(key, symbol);
-        }
+            public Player(PlayerContext context)
+            {
+                this.context = context;
+            }
 
-        return symbol;
-    }
-}
-```
-	- Fluent Interface
-    	- on `Player.cs` using `PlayerContext.cs`
-```javascript
-public class Player : IPlayer
-{
-    private readonly PlayerContext context;
+            public Player SetName(string name)
+            {
+                this.context.Name = name;
+                return this;
+            }
 
-    public Player()
-    {
-        this.context = new PlayerContext();
-    }
+            public Player SetX(int x)
+            {
+                this.context.X = x;
+                return this;
+            }
 
-    public Player(PlayerContext context)
-    {
-        this.context = context;
-    }
+            public Player SetY(int y)
+            {
+                this.context.Y = y;
+                return this;
+            }
 
-    public Player SetName(string name)
-    {
-        this.context.Name = name;
-        return this;
-    }
+            public Player SetScore(int score)
+            {
+                this.context.Score = score;
+                return this;
+            }
 
-    public Player SetX(int x)
-    {
-        this.context.X = x;
-        return this;
-    }
+            public string GetName()
+            {
+                return this.context.Name;
+            }
 
-    public Player SetY(int y)
-    {
-        this.context.Y = y;
-        return this;
-    }
+            public int GetX()
+            {
+                return this.context.X;
+            }
 
-    public Player SetScore(int score)
-    {
-        this.context.Score = score;
-        return this;
-    }
+            public int GetY()
+            {
+                return this.context.Y;
+            }
 
-    public string GetName()
-    {
-        return this.context.Name;
-    }
+            public int GetScore()
+            {
+                return this.context.Score;
+            }
+        ```
 
-    public int GetX()
-    {
-        return this.context.X;
-    }
-
-    public int GetY()
-    {
-        return this.context.Y;
-    }
-
-    public int GetScore()
-    {
-        return this.context.Score;
-    }
-```
-
-6. Added Behaivor patterns
-	
+6.  Added **Behaivor patterns**
 	- Command
 		- added new class `CommandController.cs`
 			- private List<string> commands - field for saving coomands 
@@ -251,8 +247,9 @@ all properties setters
 	- Memento
 		- added class Save.cs
 
-7. Structural Patterns 
-8. Unit test
+7.  Added **Structural Patterns**
+
+8.  Unit tests
 	
 
 
