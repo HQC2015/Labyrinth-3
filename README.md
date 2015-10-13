@@ -1,9 +1,7 @@
 ﻿High-Quality Programming Code – Team 'Labyrinth-3'
 =============================================
 
-#### [More detailed information about the Assignment](https://github.com/TelerikAcademy/High-Quality-
-
-Code/tree/master/Teamwork "TelerikAcademy High-Quality-Code")
+#### [More detailed information about the Assignment](https://github.com/TelerikAcademy/High-Quality-Code/tree/master/Teamwork "TelerikAcademy High-Quality-Code")
 
 Team Members
 --------

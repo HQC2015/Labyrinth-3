@@ -66,7 +66,7 @@
         {
             if (this.currentCommandIndex < this.commands.Count)
             {
-                string command = this.commands[this.currentCommandIndex];
+                string command = this.commands[(this.commands.Count - 1) - this.currentCommandIndex];
                 this.commandExecutors[0].ProcessCommand(command, this.player);
                 this.currentCommandIndex++;
             }
@@ -77,7 +77,7 @@
             if (this.currentCommandIndex > 0)
             {
                 this.currentCommandIndex--;
-                string command = this.commands[this.currentCommandIndex];
+                string command = this.commands[(this.commands.Count - 1) - this.currentCommandIndex];
                 this.commandExecutors[0].UnProcessCommand(command, this.player);
             }
         }

@@ -84,6 +84,8 @@
                     try
                     {
                         this.commandController.ProcessCommand(userInput);
+                        Board.Instance.ReplaceSymbol(currentPlayerX, currentPlayerY, SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace));
+                        Board.Instance.ReplaceSymbol(this.player.GetX(), this.player.GetY(), SymbolFactory.GetSymbol(SymbolsEnum.Player));
                     }
                     catch (InvalidGameCommandException ex)
                     {
@@ -91,8 +93,6 @@
                     }
                     finally
                     {
-                        Board.Instance.ReplaceSymbol(currentPlayerX, currentPlayerY, SymbolFactory.GetSymbol(SymbolsEnum.EmptySpace));
-                        Board.Instance.ReplaceSymbol(this.player.GetX(), this.player.GetY(), SymbolFactory.GetSymbol(SymbolsEnum.Player));
                         this.renderer.RenderBoard(Board.Instance);
                     }
 
